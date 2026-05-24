@@ -1,0 +1,94 @@
+# Official 5-slot portfolio definition.
+# All paths relative to ROOT below.
+# Used by final_package/src/generate_official_submissions.py.
+
+# ROOT is resolved relative to this config; in the assembled repo it is
+# pipeline_full/runnable/cached_intermediates/. Paths below are kept identical
+# to the sprint layout for cross-reference; the build_final_3.py script uses
+# its own path resolution and does not read this YAML.
+
+anchors:
+  gpt_anchor_csv: gpt_track_handoff/best_submissions/20260428_0059_phase3_10_horizon_blend_v2.csv
+  cl_anchor_csv:  claude_track_handoff/best_submissions/phase2_blend_2way_optimal.csv
+  merge_50_50:    merge_sprint/submissions/merge_A_best_50_50_both.csv
+
+zoo_predictions:
+  hep_gate_LSthr12_test:    model_zoo_sprint/predictions/test__gate_LSthr12__hep.csv
+  hep_gate_LSthr12_oof:     model_zoo_sprint/predictions/oof__gate_LSthr12__hep.csv
+  cwgbs_dea_test:           model_zoo_sprint/predictions/test__survtree__dea__longitudinal_summary__cwgbs_300_lr05.csv
+  cwgbs_dea_oof:            model_zoo_sprint/predictions/oof__survtree__dea__longitudinal_summary__cwgbs_300_lr05.csv
+  gbsa_dea_test:            model_zoo_sprint/predictions/test__survtree__dea__longitudinal_summary__gbsa_200_lr05_d3.csv
+  gbsa_dea_oof:             model_zoo_sprint/predictions/oof__survtree__dea__longitudinal_summary__gbsa_200_lr05_d3.csv
+
+slots:
+  - slot: 1
+    role: PRIMARY_PUBLIC_BEST_WITH_CAUTION
+    name: finalprobe_3_lsthr12_disagq95_cw85gbsa15
+    frozen_filename: slot1_PRIMARY_finalprobe_3_lsthr12_disagq95_cw85gbsa15.csv
+    public_lb: 0.92198
+    hep:
+      base: hep_gate_LSthr12
+      disag_override:
+        enabled: true
+        quantile: 0.95
+        fallback: merge_50_50_hep
+        provenance: OOF grid-search across {q75, q85, q90, q92, q95, q97, q99}
+    dea:
+      blend:
+        - {component: cwgbs_300_lr05, weight: 0.85}
+        - {component: gbsa_200_lr05_d3, weight: 0.15}
+      provenance: OOF grid-search across cwgbs/gbsa ratios {1.00, 0.95, 0.90, 0.85, 0.80, 0.70, 0.50}
+
+  - slot: 2
+    role: PRINCIPAL_ZOO_HEDGE
+    name: zoo_gateLSthr12_hep__cwgbs_dea_alone
+    frozen_filename: slot2_HEDGE_zoo_gateLSthr12_hep__cwgbs_dea_alone.csv
+    public_lb: 0.92135
+    hep:
+      base: hep_gate_LSthr12
+      disag_override: {enabled: false}
+    dea:
+      blend:
+        - {component: cwgbs_300_lr05, weight: 1.0}
+
+  - slot: 3
+    role: ZOO_CONSERVATIVE_HEDGE
+    name: zoo_gateLSthr12_hep__m50_50_cwgbs_dea
+    frozen_filename: slot3_HEDGE_zoo_gateLSthr12_hep__m50_50_cwgbs_dea.csv
+    public_lb: 0.91952
+    hep:
+      base: hep_gate_LSthr12
+      disag_override: {enabled: false}
+    dea:
+      blend:
+        - {component: merge_50_50_dea, weight: 0.5}
+        - {component: cwgbs_300_lr05, weight: 0.5}
+
+  - slot: 4
+    role: ZOO_CONSERVATIVE_HEDGE
+    name: zoo_gateLSthr12_hep__m50_70_cwgbs_30_dea
+    frozen_filename: slot4_HEDGE_zoo_gateLSthr12_hep__m50_70_cwgbs_30_dea.csv
+    public_lb: 0.91733
+    hep:
+      base: hep_gate_LSthr12
+      disag_override: {enabled: false}
+    dea:
+      blend:
+        - {component: merge_50_50_dea, weight: 0.7}
+        - {component: cwgbs_300_lr05, weight: 0.3}
+
+  - slot: 5
+    role: MERGE_HEDGE
+    name: merge_A_best_50_50_both
+    frozen_filename: slot5_HEDGE_merge_A_best_50_50_both.csv
+    public_lb: 0.91426
+    hep:
+      direct: merge_50_50_hep
+    dea:
+      direct: merge_50_50_dea
+
+# Schema spec for output CSVs
+output_schema:
+  columns: [trustii_id, risk_hepatic_event, risk_death]
+  n_rows: 423
+  rank_normalize: true   # output ranks normalized to (0, 1]

@@ -1,0 +1,38 @@
+{
+  "label": "phase3_14_transductive_combo",
+  "source_track": "combo",
+  "hepatic_oof": 0.8509572463049301,
+  "death_oof": 0.9539944903581267,
+  "weighted_oof": 0.881868419520889,
+  "delta_weighted": 0.0007423014081805457,
+  "delta_hep": 0.0009423668286876463,
+  "delta_dea": 0.0002754820936639035,
+  "hep_fold_std": 0.1095728507650756,
+  "hep_fold_min": 0.5968992248062015,
+  "dea_fold_std": 0.01183574305316336,
+  "dea_fold_min": 0.9269356597600873,
+  "rho_h_test_anchor": 0.9997620570073116,
+  "rho_d_test_anchor": 0.9997124703163751,
+  "rho_h_oof_anchor": 0.9997035759665958,
+  "rho_d_oof_anchor": 0.9995873774342829,
+  "h_test_rank_shift_max_abs": 0.02009456264775411,
+  "d_test_rank_shift_max_abs": 0.027186761229314405,
+  "h_test_rank_shift_mean_abs": 0.004912563083681236,
+  "d_test_rank_shift_mean_abs": 0.00530377971150568,
+  "uses_target_derived_features": false,
+  "uses_test_features": true,
+  "composing_tracks": [
+    "A_or_B",
+    "D"
+  ],
+  "uses_pseudo_labels": false,
+  "submission_csv": "gpt/submissions/20260428_0943_phase3_14_transductive_combo.csv",
+  "promotion": {
+    "promotes_by_oof": false,
+    "very_stable": true,
+    "delta_weighted": 0.0007423014081805457,
+    "delta_hep": 0.0009423668286876463,
+    "max_shift_test": 0.027186761229314405
+  },
+  "recommended": false
+}

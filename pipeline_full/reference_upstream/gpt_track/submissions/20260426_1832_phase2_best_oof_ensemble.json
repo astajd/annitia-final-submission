@@ -1,0 +1,128 @@
+{
+  "label": "phase2_best_oof_ensemble",
+  "description": "Best OOF ensemble across all available experiments. Exploratory CV upper bound \u2014 not the qualitative pick.",
+  "leakage_tag": "mixed (includes high-leakage components)",
+  "submission_csv": "gpt/submissions/20260426_1832_phase2_best_oof_ensemble.csv",
+  "feature_sets": [
+    "NIT_longitudinal_only",
+    "NIT_plus_clinical_scores",
+    "NIT_plus_scores_longitudinal",
+    "aggressive_longitudinal",
+    "all_visits_longitudinal",
+    "baseline_plus_landmark_trends",
+    "baseline_v1",
+    "clinical_scores_dynamic",
+    "early_v1_v3",
+    "first_1y",
+    "first_2y",
+    "first_3_visits",
+    "first_3y",
+    "full_high_risk",
+    "labs_longitudinal_only",
+    "longitudinal_no_followup_proxies",
+    "strict_time_aligned"
+  ],
+  "experiments": [
+    "001_baseline_v1_drop_missing_death",
+    "002_baseline_v1_censor_missing_death",
+    "003_early_v1_v3",
+    "004_all_visits_longitudinal",
+    "005_NIT_plus_clinical_scores",
+    "006_strict_time_aligned",
+    "007_full_high_risk",
+    "phase2_NIT_longitudinal_only",
+    "phase2_NIT_plus_scores_longitudinal",
+    "phase2_aggressive_longitudinal",
+    "phase2_baseline_plus_landmark_trends",
+    "phase2_clinical_scores_dynamic",
+    "phase2_first_1y",
+    "phase2_first_2y",
+    "phase2_first_3_visits",
+    "phase2_first_3y",
+    "phase2_labs_longitudinal_only",
+    "phase2_longitudinal_no_followup_proxies"
+  ],
+  "hepatic": {
+    "method": "seed_bagged",
+    "components": [
+      "001_baseline_v1_drop_missing_death::hepatic__rsf",
+      "006_strict_time_aligned::hepatic__rsf",
+      "006_strict_time_aligned::hepatic__xgb_cox"
+    ],
+    "weights": {
+      "001_baseline_v1_drop_missing_death::hepatic__rsf": 0.025641025641025633,
+      "006_strict_time_aligned::hepatic__rsf": 0.4615384615384615,
+      "006_strict_time_aligned::hepatic__xgb_cox": 0.5128205128205128
+    },
+    "oof_cindex": 0.9737790563105512
+  },
+  "death": {
+    "method": "seed_bagged",
+    "components": [
+      "001_baseline_v1_drop_missing_death::death__coxnet",
+      "001_baseline_v1_drop_missing_death::death__rsf",
+      "003_early_v1_v3::death__lgbm_binary",
+      "004_all_visits_longitudinal::death__rsf",
+      "004_all_visits_longitudinal::death__xgb_cox",
+      "005_NIT_plus_clinical_scores::death__coxnet",
+      "005_NIT_plus_clinical_scores::death__rsf",
+      "005_NIT_plus_clinical_scores::death__xgb_cox",
+      "006_strict_time_aligned::death__rsf",
+      "006_strict_time_aligned::death__xgb_cox",
+      "006_strict_time_aligned::death__lgbm_binary",
+      "007_full_high_risk::death__rsf",
+      "007_full_high_risk::death__xgb_cox",
+      "phase2_NIT_longitudinal_only::death__lgbm_binary",
+      "phase2_NIT_plus_scores_longitudinal::death__rsf",
+      "phase2_baseline_plus_landmark_trends::death__rsf",
+      "phase2_baseline_plus_landmark_trends::death__xgb_cox",
+      "phase2_clinical_scores_dynamic::death__xgb_cox",
+      "phase2_clinical_scores_dynamic::death__catboost_binary",
+      "phase2_first_3y::death__catboost_binary",
+      "phase2_first_3y::death__xgb_binary",
+      "phase2_longitudinal_no_followup_proxies::death__lgbm_binary"
+    ],
+    "weights": {
+      "001_baseline_v1_drop_missing_death::death__coxnet": 0.011494252873563222,
+      "001_baseline_v1_drop_missing_death::death__rsf": 0.022988505747126443,
+      "003_early_v1_v3::death__lgbm_binary": 0.011494252873563222,
+      "004_all_visits_longitudinal::death__rsf": 0.057471264367816105,
+      "004_all_visits_longitudinal::death__xgb_cox": 0.04597701149425289,
+      "005_NIT_plus_clinical_scores::death__coxnet": 0.10344827586206898,
+      "005_NIT_plus_clinical_scores::death__rsf": 0.057471264367816105,
+      "005_NIT_plus_clinical_scores::death__xgb_cox": 0.1609195402298851,
+      "006_strict_time_aligned::death__rsf": 0.10344827586206898,
+      "006_strict_time_aligned::death__xgb_cox": 0.057471264367816105,
+      "006_strict_time_aligned::death__lgbm_binary": 0.022988505747126443,
+      "007_full_high_risk::death__rsf": 0.20689655172413804,
+      "007_full_high_risk::death__xgb_cox": 0.03448275862068967,
+      "phase2_NIT_longitudinal_only::death__lgbm_binary": 0.011494252873563222,
+      "phase2_NIT_plus_scores_longitudinal::death__rsf": 0.011494252873563222,
+      "phase2_baseline_plus_landmark_trends::death__rsf": 0.011494252873563222,
+      "phase2_baseline_plus_landmark_trends::death__xgb_cox": 0.011494252873563222,
+      "phase2_clinical_scores_dynamic::death__xgb_cox": 0.011494252873563222,
+      "phase2_clinical_scores_dynamic::death__catboost_binary": 0.011494252873563222,
+      "phase2_first_3y::death__catboost_binary": 0.011494252873563222,
+      "phase2_first_3y::death__xgb_binary": 0.011494252873563222,
+      "phase2_longitudinal_no_followup_proxies::death__lgbm_binary": 0.011494252873563222
+    },
+    "oof_cindex": 0.9527018436109346
+  },
+  "weighted_score_cv": 0.9674558925006662,
+  "all_methods_oof": {
+    "hepatic": {
+      "equal": 0.8087821975333135,
+      "cv_weighted": 0.8871143735740502,
+      "greedy": 0.9733161392718976,
+      "capped": 0.8355321892669378,
+      "seed_bagged": 0.9737790563105512
+    },
+    "death": {
+      "equal": 0.8682347955075228,
+      "cv_weighted": 0.9337147700784064,
+      "greedy": 0.9522780250052977,
+      "capped": 0.8997668997668997,
+      "seed_bagged": 0.9527018436109346
+    }
+  }
+}

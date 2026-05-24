@@ -1,0 +1,74 @@
+{
+  "submission_kind": "honest ensemble \u2014 Tier 1+2 only (qualitative-track-safe)",
+  "hepatic": {
+    "ensemble_strategy": "rank-average across members",
+    "members": [
+      {
+        "id": "rsf_baseline_v1",
+        "model": "rsf",
+        "feature_set": "baseline_v1",
+        "params": {
+          "n_estimators": 279,
+          "min_samples_leaf": 12,
+          "min_samples_split": 71,
+          "max_features": "log2"
+        },
+        "n_features": 23,
+        "risk_min": 0.08891909088734096,
+        "risk_max": 6.938087172695483
+      },
+      {
+        "id": "xgb_cox_baseline_v1",
+        "model": "xgb_cox",
+        "feature_set": "baseline_v1",
+        "params": {
+          "n_estimators": 320,
+          "learning_rate": 0.011627388738686578,
+          "max_depth": 8,
+          "min_child_weight": 1.8809463655465164,
+          "subsample": 0.7457174290570576,
+          "colsample_bytree": 0.6941935551421055,
+          "reg_lambda": 0.3040863647001995
+        },
+        "n_features": 23,
+        "risk_min": 0.08152984698109648,
+        "risk_max": 63.36994552628158
+      },
+      {
+        "id": "rsf_nit_only_baseline_only",
+        "model": "rsf",
+        "feature_set": "nit_only_baseline_only",
+        "params": {
+          "n_estimators": 439,
+          "min_samples_leaf": 23,
+          "min_samples_split": 85,
+          "max_features": "log2"
+        },
+        "n_features": 14,
+        "risk_min": 0.2471976045639589,
+        "risk_max": 6.550325069725693
+      }
+    ],
+    "cv_protocol": "5-fold \u00d7 10-repeat stratified, oof rank-average per fold",
+    "cv_mean": 0.8138004882709707,
+    "cv_std": 0.08349151606279827,
+    "cv_mean_minus_std": 0.7303089722081725,
+    "n_folds": 50
+  },
+  "death": {
+    "feature_set": "longitudinal_summary",
+    "model": "xgb_cox",
+    "params": {
+      "n_estimators": 300,
+      "learning_rate": 0.05
+    },
+    "death_mode": "censor_missing_death_at_last",
+    "n_features": 143,
+    "cv_train_side_cindex": "0.948 \u00b1 0.018 (Phase 2 grid)"
+  },
+  "weighted_score": {
+    "formula": "0.7 * hep_mean + 0.3 * death_mean",
+    "implied_cv_mean": 0.8540603417896795,
+    "implied_cv_mean_minus_std": 0.7902162805457207
+  }
+}

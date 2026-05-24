@@ -1,0 +1,18 @@
+{
+  "cindex_hepatic_mean": 0.8260179132135336,
+  "cindex_hepatic_std": 0.11109332475350235,
+  "cindex_hepatic_min": 0.6015503875968993,
+  "cindex_hepatic_max": 0.9651162790697675,
+  "cindex_hepatic_mean_minus_halfsd": 0.7704712508367824,
+  "cindex_death_mean": 0.8996498663929887,
+  "cindex_death_std": 0.021014952999597408,
+  "cindex_death_min": 0.8648648648648649,
+  "cindex_death_max": 0.9422028353326063,
+  "cindex_death_mean_minus_halfsd": 0.88914238989319,
+  "score_mean": 0.8481074991673699,
+  "score_std": 0.07539136778178405,
+  "score_min": 0.695688445921004,
+  "score_max": 0.9412500991101433,
+  "score_mean_minus_halfsd": 0.8104118152764779,
+  "n_folds": 15
+}

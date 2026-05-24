@@ -1,0 +1,51 @@
+{
+  "submission_kind": "ship candidate \u2014 Tier-2 landmark, audited",
+  "hepatic": {
+    "feature_set": "landmark_3y",
+    "feature_builder": "src/features.py::build_landmark_features",
+    "tier": "2 (clean longitudinal, fixed reference time)",
+    "model": "rsf",
+    "params": {
+      "n_estimators": 279,
+      "min_samples_leaf": 12,
+      "min_samples_split": 71,
+      "max_features": "log2"
+    },
+    "params_source": "Optuna best for rsf_baseline_v1 (Experiment 2)",
+    "train_cohort": {
+      "filter": "at_risk_at_landmark = drop event-before-landmark",
+      "n_train": 1238,
+      "n_train_events": 32,
+      "n_dropped_pre_landmark": 15
+    },
+    "n_features": 49,
+    "cv_mean": 0.8798,
+    "cv_std": 0.065,
+    "cv_mean_minus_std": 0.8148,
+    "cv_protocol": "5-fold \u00d7 10-repeat stratified, filter A cohort"
+  },
+  "death": {
+    "feature_set": "longitudinal_summary",
+    "model": "xgb_cox",
+    "params": {
+      "n_estimators": 300,
+      "learning_rate": 0.05
+    },
+    "death_mode": "censor_missing_death_at_last",
+    "n_features": 143,
+    "cv_train_side_cindex": "0.948 \u00b1 0.018 (Phase 2 grid)"
+  },
+  "ensemble": "single model per endpoint (no within-endpoint blending)",
+  "weighted_score": {
+    "formula": "0.7 * hep_mean + 0.3 * death_mean",
+    "implied_cv_mean": 0.90026,
+    "implied_cv_mean_minus_std": 0.8493599999999999,
+    "expected_LB_user_estimate": "0.83 \u00b1 0.05 (per phase2d_audit conclusion)"
+  },
+  "ood_risk": {
+    "fraction_test_without_landmark_data": 0.21276595744680848,
+    "n_test_without_landmark_data": 90,
+    "note": "90 of 423 test patients (21.3%) have no observed visit reaching 3.0y after Age_v1. For these rows the LOCF-at-landmark feature is their last-observed value, which may be at <3.0y. The model was trained on a mixture of these regimes (per Phase 2d audit), so predictions are defined for all test rows but the OOD subset is the main source of CV-vs-LB gap risk."
+  },
+  "audit_reference": "reports/phase2d_audit.md"
+}

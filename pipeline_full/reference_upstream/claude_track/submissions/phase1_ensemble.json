@@ -1,0 +1,60 @@
+{
+  "hepatic_ensemble": [
+    {
+      "fs": "baseline_v1",
+      "model": "make_rsf",
+      "kwargs": {
+        "n_estimators": 300
+      }
+    },
+    {
+      "fs": "baseline_v1",
+      "model": "make_xgb_cox",
+      "kwargs": {
+        "n_estimators": 300,
+        "learning_rate": 0.05
+      }
+    },
+    {
+      "fs": "nit_only",
+      "model": "make_xgb_cox",
+      "kwargs": {
+        "n_estimators": 300,
+        "learning_rate": 0.05
+      }
+    },
+    {
+      "fs": "early_v1_v3",
+      "model": "make_xgb_cox",
+      "kwargs": {
+        "n_estimators": 300,
+        "learning_rate": 0.05
+      }
+    }
+  ],
+  "death_ensemble": [
+    {
+      "fs": "baseline_v1",
+      "model": "make_xgb_cox",
+      "kwargs": {
+        "n_estimators": 300,
+        "learning_rate": 0.05
+      }
+    },
+    {
+      "fs": "baseline_v1",
+      "model": "make_coxnet",
+      "kwargs": {}
+    },
+    {
+      "fs": "longitudinal_summary",
+      "model": "make_xgb_cox",
+      "kwargs": {
+        "n_estimators": 300,
+        "learning_rate": 0.05
+      }
+    }
+  ],
+  "death_mode": "censor_missing_death_at_last",
+  "ranks_averaged": true
+}

@@ -1,0 +1,98 @@
+{
+  "experiment": "Phase 3 Priority 1 \u2014 methodology sensitivity",
+  "cv_protocol": {
+    "n_splits": 5,
+    "n_repeats": 10,
+    "base_seed": 42
+  },
+  "blend_weights": {
+    "landmark_or_RSF": 0.3,
+    "permissive_or_XGB": 0.7
+  },
+  "lb_correction": 0.07,
+  "death_lb_assumed": 0.96,
+  "results": {
+    "tier_1_baseline_v1": {
+      "rsf": {
+        "mean": 0.8056679816282478,
+        "std": 0.08610444830351338,
+        "mean_minus_std": 0.7195635333247344
+      },
+      "xgb": {
+        "mean": 0.7907056358264489,
+        "std": 0.0839467129505194,
+        "mean_minus_std": 0.7067589228759296
+      },
+      "blend_30_70": {
+        "mean": 0.8055425178175123,
+        "std": 0.08543148624303788,
+        "mean_minus_std": 0.7201110315744744
+      },
+      "n_features": 23,
+      "components_share_features": true
+    },
+    "tier_2_landmark_2y": {
+      "rsf": {
+        "mean": 0.7759781548069132,
+        "std": 0.09600854261409783,
+        "mean_minus_std": 0.6799696121928154
+      },
+      "xgb": {
+        "mean": 0.7272302997775374,
+        "std": 0.10046185358343848,
+        "mean_minus_std": 0.6267684461940989
+      },
+      "blend_30_70": {
+        "mean": 0.7471625744146583,
+        "std": 0.0998979641636782,
+        "mean_minus_std": 0.64726461025098
+      },
+      "n_features": 49,
+      "filter_A_n": 1241,
+      "components_share_features": true
+    },
+    "tier_4_current": {
+      "lm3": {
+        "mean": 0.7736585729487692,
+        "std": 0.10249624520623307,
+        "mean_minus_std": 0.671162327742536
+      },
+      "perm_ensemble": {
+        "mean": 0.8103129468654541,
+        "std": 0.09063078775642394,
+        "mean_minus_std": 0.7196821591090301
+      },
+      "blend_30_70": {
+        "mean": 0.8146586208838218,
+        "std": 0.09130046270191224,
+        "mean_minus_std": 0.7233581581819095
+      },
+      "components_share_features": false,
+      "observed_LB": 0.8965
+    }
+  },
+  "summary_table": [
+    {
+      "tier": "tier_1_baseline_v1",
+      "blend_mean": 0.8055425178175123,
+      "blend_std": 0.08543148624303788,
+      "blend_mean_minus_std": 0.7201110315744744,
+      "lb_implied": 0.9008797624722584
+    },
+    {
+      "tier": "tier_2_landmark_2y",
+      "blend_mean": 0.7471625744146583,
+      "blend_std": 0.0998979641636782,
+      "blend_mean_minus_std": 0.64726461025098,
+      "lb_implied": 0.8600138020902608
+    },
+    {
+      "tier": "tier_4_current",
+      "blend_mean": 0.8146586208838218,
+      "blend_std": 0.09130046270191224,
+      "blend_mean_minus_std": 0.7233581581819095,
+      "lb_implied": 0.9072610346186751
+    }
+  ],
+  "caveat": "LB-implied uses CV_mean + 0.07 and death_LB_assumed = 0.96; the +0.07 correction was empirically derived from a single submission (phase2_blend_2way_optimal); the LB-noise analysis (phase3_lb_decoupling) shows \u00b10.02-0.04 jitter on top of any point estimate."
+}

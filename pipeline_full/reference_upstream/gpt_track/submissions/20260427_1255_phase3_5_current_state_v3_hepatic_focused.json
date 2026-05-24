@@ -1,0 +1,51 @@
+{
+  "label": "phase3_5_current_state_v3_hepatic_focused",
+  "description": "Hepatic-priority: blends current_state_v2 with a no-visit-history RSF; ablation E showed +0.003 hep gain. Death uses the simplified pool (binary classifiers dropped) for stability.",
+  "leakage_tag": "moderate-high",
+  "submission_csv": "gpt/submissions/20260427_1255_phase3_5_current_state_v3_hepatic_focused.csv",
+  "uses_target_derived_features": false,
+  "hepatic": {
+    "method": "greedy",
+    "components": [
+      "phase3_5_no_visit_history::hepatic__rsf__nh"
+    ],
+    "weights": {
+      "phase3_5_no_visit_history::hepatic__rsf__nh": 1.0
+    },
+    "oof_cindex": 0.8414839797639123
+  },
+  "death": {
+    "method": "seed_bagged",
+    "components": [
+      "phase3_current_state_v2::death__rsf__s0",
+      "phase3_current_state_v2::death__xgb_cox__s0",
+      "phase3_current_state_v2::death__xgb_aft__s0",
+      "phase3_current_state_v2::death__xgb_cox__s1"
+    ],
+    "weights": {
+      "phase3_current_state_v2::death__rsf__s0": 0.3653846153846154,
+      "phase3_current_state_v2::death__xgb_cox__s0": 0.2692307692307692,
+      "phase3_current_state_v2::death__xgb_aft__s0": 0.17307692307692302,
+      "phase3_current_state_v2::death__xgb_cox__s1": 0.19230769230769224
+    },
+    "oof_cindex": 0.949607967789786
+  },
+  "weighted_score_cv": 0.8739211761716743,
+  "rank_corr_with_current_state_v2": {
+    "oof_hepatic": 0.9187156641200979,
+    "oof_death": 0.998928412173923,
+    "test_hepatic": 0.9646556204538035,
+    "test_death": 0.9992432868012855
+  },
+  "all_methods_oof_hepatic": {
+    "equal": 0.7999537082961347,
+    "greedy": 0.8414839797639123,
+    "cv_weighted": 0.824488311344774,
+    "seed_bagged": 0.840144826902093
+  },
+  "all_methods_oof_death": {
+    "equal": 0.9484848484848485,
+    "cv_weighted": 0.9485060394151303,
+    "seed_bagged": 0.949607967789786
+  }
+}

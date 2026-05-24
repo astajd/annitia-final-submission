@@ -1,0 +1,306 @@
+{
+  "experiment": "Phase 3 Exp 2 \u2014 OOF cross-feature stacking",
+  "cv_protocol": {
+    "n_splits": 5,
+    "n_repeats": 10,
+    "base_seed": 42
+  },
+  "cohorts": {
+    "hep_n": 1253,
+    "hep_events": 47,
+    "death_n": 1253,
+    "death_events": 76,
+    "filter_A_n": 1238
+  },
+  "leakage_check": {
+    "sampled_rows": [
+      {
+        "endpoint": "hepatic",
+        "patient_id": "JPX16F1KYNTL",
+        "row_in_cohort": 796,
+        "n_val_appearances": 10,
+        "first_three_val_folds": [
+          [
+            0,
+            0
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            2,
+            1
+          ]
+        ],
+        "train_isolation": true
+      },
+      {
+        "endpoint": "hepatic",
+        "patient_id": "4NTHZM32HZS3",
+        "row_in_cohort": 639,
+        "n_val_appearances": 10,
+        "first_three_val_folds": [
+          [
+            0,
+            0
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            2,
+            3
+          ]
+        ],
+        "train_isolation": true
+      },
+      {
+        "endpoint": "hepatic",
+        "patient_id": "W4C6LBPJ8T22",
+        "row_in_cohort": 337,
+        "n_val_appearances": 10,
+        "first_three_val_folds": [
+          [
+            0,
+            4
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            2,
+            2
+          ]
+        ],
+        "train_isolation": true
+      },
+      {
+        "endpoint": "hepatic",
+        "patient_id": "X8L008UHBXLB",
+        "row_in_cohort": 385,
+        "n_val_appearances": 10,
+        "first_three_val_folds": [
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            4
+          ],
+          [
+            2,
+            4
+          ]
+        ],
+        "train_isolation": true
+      },
+      {
+        "endpoint": "hepatic",
+        "patient_id": "7SU62J8LBDSG",
+        "row_in_cohort": 1062,
+        "n_val_appearances": 10,
+        "first_three_val_folds": [
+          [
+            0,
+            3
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            2,
+            0
+          ]
+        ],
+        "train_isolation": true
+      },
+      {
+        "endpoint": "death",
+        "patient_id": "DKN2K7IT7XXD",
+        "row_in_cohort": 1015,
+        "n_val_appearances": 10,
+        "first_three_val_folds": [
+          [
+            0,
+            0
+          ],
+          [
+            1,
+            4
+          ],
+          [
+            2,
+            2
+          ]
+        ],
+        "train_isolation": true
+      },
+      {
+        "endpoint": "death",
+        "patient_id": "RG29D2FF5L6B",
+        "row_in_cohort": 630,
+        "n_val_appearances": 10,
+        "first_three_val_folds": [
+          [
+            0,
+            3
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            2,
+            0
+          ]
+        ],
+        "train_isolation": true
+      },
+      {
+        "endpoint": "death",
+        "patient_id": "3HZCD3GEQ10F",
+        "row_in_cohort": 811,
+        "n_val_appearances": 10,
+        "first_three_val_folds": [
+          [
+            0,
+            4
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            2,
+            3
+          ]
+        ],
+        "train_isolation": true
+      },
+      {
+        "endpoint": "death",
+        "patient_id": "826BHYZ1OV5V",
+        "row_in_cohort": 1141,
+        "n_val_appearances": 10,
+        "first_three_val_folds": [
+          [
+            0,
+            3
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            2,
+            0
+          ]
+        ],
+        "train_isolation": true
+      },
+      {
+        "endpoint": "death",
+        "patient_id": "HLI5L692TULG",
+        "row_in_cohort": 760,
+        "n_val_appearances": 10,
+        "first_three_val_folds": [
+          [
+            0,
+            0
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            2,
+            3
+          ]
+        ],
+        "train_isolation": true
+      }
+    ],
+    "verdict": "PASS"
+  },
+  "round_1": {
+    "landmark": {
+      "base": 0.671162327742536,
+      "aug": 0.6805769858285542,
+      "delta": 0.009414658086018157,
+      "rank_corr_base_aug": 0.617306559610784
+    },
+    "xgb_h": {
+      "base": 0.6949486606379065,
+      "aug": 0.6976175214531601,
+      "delta": 0.0026688608152536375,
+      "rank_corr_base_aug": 0.9926094376232503
+    },
+    "death": {
+      "base": 0.9312929894634978,
+      "aug": 0.9303511737990133,
+      "delta": -0.00094181566448448
+    },
+    "best_hepatic_delta": 0.009414658086018157,
+    "improvement_threshold": 0.005
+  },
+  "round_2": {
+    "ran": true,
+    "lm_aug2_ms": 0.6780503841072824,
+    "xgb_h_aug2_ms": 0.6955488722765018,
+    "death_aug2_ms": 0.9278263450505335,
+    "lm_delta_vs_round1": -0.0025266017212718372,
+    "xgb_h_delta_vs_round1": -0.002068649176658388,
+    "death_delta_vs_round1": -0.0025248287484798126
+  },
+  "submission_built": true,
+  "submission_meta": {
+    "submission_kind": "phase3 cross-feature stacked blend",
+    "augmented_components": {
+      "landmark_3y_RSF": true,
+      "xgb_cox_longitudinal_summary_in_permissive": false,
+      "death_model": false
+    },
+    "blend_weights": {
+      "landmark": 0.3,
+      "permissive": 0.7
+    },
+    "permissive_members": [
+      {
+        "id": "rsf_longitudinal_summary",
+        "augmented": false,
+        "model": "rsf",
+        "feature_set": "longitudinal_summary"
+      },
+      {
+        "id": "xgb_cox_longitudinal_plus_meta",
+        "augmented": false,
+        "model": "xgb_cox",
+        "feature_set": "longitudinal_plus_meta"
+      },
+      {
+        "id": "xgb_cox_longitudinal_summary",
+        "augmented": false,
+        "model": "xgb_cox",
+        "feature_set": "longitudinal_summary"
+      }
+    ],
+    "cv_diagnostic": {
+      "lm_base_ms": 0.671162327742536,
+      "lm_aug_ms": 0.6805769858285542,
+      "lm_delta": 0.009414658086018157,
+      "xgb_h_base_ms": 0.6949486606379065,
+      "xgb_h_aug_ms": 0.6976175214531601,
+      "xgb_h_delta": 0.0026688608152536375,
+      "death_base_ms": 0.9312929894634978,
+      "death_aug_ms": 0.9303511737990133,
+      "death_delta": -0.00094181566448448
+    },
+    "improvement_threshold": 0.005,
+    "vs_phase2_blend_2way_optimal_LB_0.8965": "augmented version of the same components; compare against 0.8965 anchor"
+  }
+}

@@ -1,0 +1,11 @@
+endpoint,model,feature_set,leakage_risk,n_folds_evaluated,cindex_mean,cindex_std,cindex_min
+hepatic,coxnet,NIT_plus_clinical_scores,low/moderate,15,0.7028022109104969,0.11994520291826592,0.45842531272994846
+hepatic,rsf,NIT_plus_clinical_scores,low/moderate,15,0.8192367985307196,0.11348224720380735,0.5891472868217055
+hepatic,xgb_cox,NIT_plus_clinical_scores,low/moderate,15,0.7715075605064755,0.1451178934129465,0.46799116997792495
+hepatic,lgbm_binary,NIT_plus_clinical_scores,low/moderate,15,0.758214584753586,0.11675437695345976,0.5827067669172933
+hepatic,catboost_binary,NIT_plus_clinical_scores,low/moderate,15,0.7132227013334765,0.12714668095636975,0.5415746872700515
+death,coxnet,NIT_plus_clinical_scores,low/moderate,15,0.9032426083254312,0.04019416441268495,0.7871443624868283
+death,rsf,NIT_plus_clinical_scores,low/moderate,15,0.9281667763334095,0.017671548005081687,0.9003021148036254
+death,xgb_cox,NIT_plus_clinical_scores,low/moderate,15,0.9470598460237888,0.020144555804058602,0.9040348964013086
+death,lgbm_binary,NIT_plus_clinical_scores,low/moderate,15,0.7574496342115109,0.0604384026461562,0.6590257879656161
+death,catboost_binary,NIT_plus_clinical_scores,low/moderate,15,0.7426564205566026,0.07035942748355711,0.6052344601962922

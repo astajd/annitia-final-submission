@@ -1,0 +1,60 @@
+{
+  "label": "phase3_10_horizon_private_robust",
+  "blend_id": "ensemble_alpha=0.9_both",
+  "alpha": 0.9,
+  "side": "both",
+  "components_hepatic": [
+    "v3_hepatic_schema__hepatic__h3__lgbm_binary__s4",
+    "v3_hepatic_schema__hepatic__h6__catboost_binary",
+    "NIT_plus_scores__hepatic__h3__lgbm_binary",
+    "v3_hepatic_schema__hepatic__h6__lgbm_binary__dw",
+    "NIT_plus_scores__hepatic__h1__lgbm_binary",
+    "v3_hepatic_schema__hepatic__h2__catboost_binary"
+  ],
+  "components_death": [
+    "current_state_v2__death__h6__catboost_binary",
+    "current_state_v2__death__h4__catboost_binary",
+    "current_state_v2__death__h5__catboost_binary__s3",
+    "NIT_plus_scores__death__h5__xgb_binary"
+  ],
+  "weights_hepatic": {
+    "v3_hep": 0.9,
+    "v3_hepatic_schema__hepatic__h3__lgbm_binary__s4": 0.016666666666666663,
+    "v3_hepatic_schema__hepatic__h6__catboost_binary": 0.016666666666666663,
+    "NIT_plus_scores__hepatic__h3__lgbm_binary": 0.016666666666666663,
+    "v3_hepatic_schema__hepatic__h6__lgbm_binary__dw": 0.016666666666666663,
+    "NIT_plus_scores__hepatic__h1__lgbm_binary": 0.016666666666666663,
+    "v3_hepatic_schema__hepatic__h2__catboost_binary": 0.016666666666666663
+  },
+  "weights_death": {
+    "v3_dea": 0.9,
+    "current_state_v2__death__h6__catboost_binary": 0.024999999999999994,
+    "current_state_v2__death__h4__catboost_binary": 0.024999999999999994,
+    "current_state_v2__death__h5__catboost_binary__s3": 0.024999999999999994,
+    "NIT_plus_scores__death__h5__xgb_binary": 0.024999999999999994
+  },
+  "hepatic_oof": 0.8456832986145555,
+  "death_oof": 0.9515575333757152,
+  "weighted_oof": 0.8774455690429033,
+  "hepatic_fold_std": 0.10302287721741596,
+  "hepatic_fold_min": 0.6077519379844961,
+  "death_fold_std": 0.013048875468393775,
+  "death_fold_min": 0.9269356597600873,
+  "rho_test_with_phase3_9_horizon_blend": {
+    "hepatic": 0.9973142628742041,
+    "death": 0.9989983682161868,
+    "weighted": 0.9978194944767989
+  },
+  "rho_oof_with_phase3_9_horizon_blend": {
+    "hepatic": 0.996414720500101,
+    "death": 0.9978720406277876
+  },
+  "delta_vs_phase3_9": {
+    "weighted_oof": 0.0006489122784403278,
+    "hepatic_oof": 0.0005455807955559999,
+    "death_oof": 0.000890019071837278
+  },
+  "uses_target_derived_features": false,
+  "rationale": "Conservative variant: trades a small slice of OOF for better fold stability (lower hepatic fold std and/or higher fold min).",
+  "submission_csv": "gpt/submissions/20260428_0059_phase3_10_horizon_private_robust.csv"
+}

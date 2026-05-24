@@ -1,0 +1,15 @@
+__pycache__/
+*.pyc
+.venv/
+data/raw/*.csv
+data/processed/
+.ipynb_checkpoints/
+.DS_Store
+
+# Optuna SQLite studies — binary, derived, re-runnable. Best params live in
+# configs/optuna_*.json which IS tracked.
+configs/*.db
+
+# OOF prediction caches — derived artifacts, regenerable from
+# phase2_audit_v2.py in ~3 min; tracked summaries live in reports/*.json/md.
+reports/*.pkl

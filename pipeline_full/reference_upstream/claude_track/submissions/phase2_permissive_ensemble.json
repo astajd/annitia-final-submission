@@ -1,0 +1,77 @@
+{
+  "submission_kind": "permissive ensemble \u2014 Tier 4 (organizer-blessed quantitative track)",
+  "hepatic": {
+    "ensemble_strategy": "rank-average across members",
+    "members": [
+      {
+        "id": "rsf_longitudinal_summary",
+        "model": "rsf",
+        "feature_set": "longitudinal_summary",
+        "params": {
+          "n_estimators": 679,
+          "min_samples_leaf": 5,
+          "min_samples_split": 76,
+          "max_features": "sqrt"
+        },
+        "n_features": 143,
+        "risk_min": 0.09340406593565881,
+        "risk_max": 11.224985833979312
+      },
+      {
+        "id": "xgb_cox_longitudinal_plus_meta",
+        "model": "xgb_cox",
+        "feature_set": "longitudinal_plus_meta",
+        "params": {
+          "n_estimators": 270,
+          "learning_rate": 0.010003759579011472,
+          "max_depth": 7,
+          "min_child_weight": 2.2844473344460754,
+          "subsample": 0.9569061485784357,
+          "colsample_bytree": 0.9970399773242598,
+          "reg_lambda": 3.1655144979108063
+        },
+        "n_features": 144,
+        "risk_min": 0.13574300791044966,
+        "risk_max": 11.390808105230576
+      },
+      {
+        "id": "xgb_cox_longitudinal_summary",
+        "model": "xgb_cox",
+        "feature_set": "longitudinal_summary",
+        "params": {
+          "n_estimators": 444,
+          "learning_rate": 0.013890990747050674,
+          "max_depth": 5,
+          "min_child_weight": 1.0288407478484667,
+          "subsample": 0.9361937553113701,
+          "colsample_bytree": 0.675639310110157,
+          "reg_lambda": 6.478763832062464
+        },
+        "n_features": 143,
+        "risk_min": 0.04335084269662633,
+        "risk_max": 35.16473769983442
+      }
+    ],
+    "cv_protocol": "5-fold \u00d7 10-repeat stratified, oof rank-average per fold",
+    "cv_mean": 0.8103129468654541,
+    "cv_std": 0.09063078775642394,
+    "cv_mean_minus_std": 0.7196821591090301,
+    "n_folds": 50
+  },
+  "death": {
+    "feature_set": "longitudinal_summary",
+    "model": "xgb_cox",
+    "params": {
+      "n_estimators": 300,
+      "learning_rate": 0.05
+    },
+    "death_mode": "censor_missing_death_at_last",
+    "n_features": 143,
+    "cv_train_side_cindex": "0.948 \u00b1 0.018 (Phase 2 grid)"
+  },
+  "weighted_score": {
+    "formula": "0.7 * hep_mean + 0.3 * death_mean",
+    "implied_cv_mean": 0.8516190628058178,
+    "implied_cv_mean_minus_std": 0.7827775113763211
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "label": "phase3_5_current_state_v3_simplified",
+  "description": "Phase 3 current_state_v2 with rank-corr>0.98 components dropped and weak binary classifiers removed from the death pool.",
+  "leakage_tag": "moderate-high (inherits current_state_v2 leakage profile)",
+  "submission_csv": "gpt/submissions/20260427_1255_phase3_5_current_state_v3_simplified.csv",
+  "uses_target_derived_features": false,
+  "hepatic": {
+    "method": "greedy",
+    "components": [
+      "phase3_current_state_v2::hepatic__rsf__s0",
+      "phase3_current_state_v2::hepatic__xgb_aft__s0",
+      "phase3_current_state_v2::hepatic__rsf__s1"
+    ],
+    "weights": {
+      "phase3_current_state_v2::hepatic__rsf__s0": 1.0,
+      "phase3_current_state_v2::hepatic__xgb_aft__s0": 1.0,
+      "phase3_current_state_v2::hepatic__rsf__s1": 1.0
+    },
+    "oof_cindex": 0.8377641107033033
+  },
+  "death": {
+    "method": "seed_bagged",
+    "components": [
+      "phase3_current_state_v2::death__rsf__s0",
+      "phase3_current_state_v2::death__xgb_cox__s0",
+      "phase3_current_state_v2::death__xgb_aft__s0",
+      "phase3_current_state_v2::death__xgb_cox__s1"
+    ],
+    "weights": {
+      "phase3_current_state_v2::death__rsf__s0": 0.3653846153846154,
+      "phase3_current_state_v2::death__xgb_cox__s0": 0.2692307692307692,
+      "phase3_current_state_v2::death__xgb_aft__s0": 0.17307692307692302,
+      "phase3_current_state_v2::death__xgb_cox__s1": 0.19230769230769224
+    },
+    "oof_cindex": 0.949607967789786
+  },
+  "weighted_score_cv": 0.871317267829248,
+  "rank_corr_with_current_state_v2": {
+    "oof_hepatic": 1.0,
+    "oof_death": 0.998928412173923,
+    "test_hepatic": 0.9999997225387317,
+    "test_death": 0.9992432868012855
+  },
+  "all_methods_oof_hepatic": {
+    "equal": 0.7907119002744437,
+    "greedy": 0.8377641107033033,
+    "cv_weighted": 0.8142710709916344,
+    "seed_bagged": 0.836325761333201
+  },
+  "all_methods_oof_death": {
+    "equal": 0.9484848484848485,
+    "greedy": 0.948823903369358,
+    "cv_weighted": 0.9485060394151303,
+    "seed_bagged": 0.949607967789786
+  }
+}

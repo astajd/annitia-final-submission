@@ -1,0 +1,71 @@
+{
+  "label": "phase3_6_v4_hepatic_focused_bagged",
+  "description": "Extra-seed bagged hepatic ensemble: RSF + xgb_aft on current_state_v2 (s0..s4) and current_state_v2_no_visit_history (s0..s4). Death side reuses v3.",
+  "leakage_tag": "moderate-high (current_state_v2 family)",
+  "submission_csv": "gpt/submissions/20260427_1431_phase3_6_v4_hepatic_focused_bagged.csv",
+  "uses_target_derived_features": false,
+  "hepatic": {
+    "method": "seed_bagged",
+    "components": [
+      "phase3_6_no_visit_history::hepatic__rsf__s0",
+      "phase3_6_no_visit_history::hepatic__rsf__s1",
+      "phase3_6_no_visit_history::hepatic__rsf__s4",
+      "phase3_current_state_v2::hepatic__xgb_aft__s0",
+      "phase3_current_state_v2::hepatic__rsf__s0",
+      "phase3_current_state_v2::hepatic__rsf__s1",
+      "phase3_6_csv2_extra_seeds::hepatic__rsf__s2",
+      "phase3_6_csv2_extra_seeds::hepatic__rsf__s4"
+    ],
+    "weights": {
+      "phase3_6_no_visit_history::hepatic__rsf__s0": 0.1142857142857143,
+      "phase3_6_no_visit_history::hepatic__rsf__s1": 0.028571428571428574,
+      "phase3_6_no_visit_history::hepatic__rsf__s4": 0.22857142857142856,
+      "phase3_current_state_v2::hepatic__xgb_aft__s0": 0.17142857142857143,
+      "phase3_current_state_v2::hepatic__rsf__s0": 0.08571428571428573,
+      "phase3_current_state_v2::hepatic__rsf__s1": 0.14285714285714285,
+      "phase3_6_csv2_extra_seeds::hepatic__rsf__s2": 0.14285714285714285,
+      "phase3_6_csv2_extra_seeds::hepatic__rsf__s4": 0.08571428571428573
+    },
+    "oof_cindex": 0.8416162417749562,
+    "fold_mean": 0.8380748211513089,
+    "fold_std": 0.1062945387001603,
+    "fold_min": 0.6031007751937985,
+    "all_methods_oof": {
+      "equal": 0.8356809840293622,
+      "greedy": 0.8401944251562345,
+      "cv_weighted": 0.8351023377310453,
+      "seed_bagged": 0.8416162417749562
+    }
+  },
+  "death": {
+    "method": "seed_bagged",
+    "components": [
+      "phase3_current_state_v2::death__rsf__s0",
+      "phase3_current_state_v2::death__xgb_cox__s0",
+      "phase3_current_state_v2::death__xgb_aft__s0",
+      "phase3_current_state_v2::death__xgb_cox__s1"
+    ],
+    "weights": {
+      "phase3_current_state_v2::death__rsf__s0": 0.3653846153846154,
+      "phase3_current_state_v2::death__xgb_cox__s0": 0.2692307692307692,
+      "phase3_current_state_v2::death__xgb_aft__s0": 0.17307692307692302,
+      "phase3_current_state_v2::death__xgb_cox__s1": 0.19230769230769224
+    },
+    "oof_cindex": 0.949607967789786,
+    "fold_mean": 0.9501800691404605,
+    "fold_std": 0.011514309017754649,
+    "fold_min": 0.9269340974212035,
+    "all_methods_oof": {
+      "equal": 0.9484848484848485,
+      "cv_weighted": 0.9485060394151303,
+      "seed_bagged": 0.949607967789786
+    }
+  },
+  "weighted_score_cv": 0.8740137595794051,
+  "rank_corr_with_v3_hepatic_focused": {
+    "oof_hepatic": 1.0,
+    "oof_death": 0.9999999999999999,
+    "test_hepatic": 0.9898908975110919,
+    "test_death": 0.9999999207256488
+  }
+}

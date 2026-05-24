@@ -1,0 +1,19 @@
+{
+  "id": "coxnet_baseline_v1",
+  "model": "coxnet",
+  "feature_set": "baseline_v1",
+  "sampler": "TPE",
+  "inner_cv": "5-fold \u00d7 5-repeat",
+  "selection_metric": "mean \u2212 1\u00d7std of C-index",
+  "n_trials_complete": 50,
+  "n_trials_failed": 0,
+  "best_trial_number": 32,
+  "best_params": {
+    "l1_ratio": 0.8530090194461845,
+    "alpha_min_ratio": 0.0317701661709683
+  },
+  "best_mean": 0.7255995617893867,
+  "best_std": 0.1096621104198223,
+  "best_mean_minus_std": 0.6159374513695643,
+  "tuning_seconds": 10.7
+}

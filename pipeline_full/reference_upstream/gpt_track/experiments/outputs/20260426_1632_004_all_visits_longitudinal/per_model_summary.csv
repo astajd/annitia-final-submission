@@ -1,0 +1,9 @@
+endpoint,model,feature_set,leakage_risk,n_folds_evaluated,cindex_mean,cindex_std,cindex_min
+hepatic,rsf,all_visits_longitudinal,high,15,0.8041265859390325,0.11283746317367159,0.5743193524650478
+hepatic,xgb_cox,all_visits_longitudinal,high,15,0.7462224700152131,0.1432613706292983,0.44223693892568067
+hepatic,lgbm_binary,all_visits_longitudinal,high,15,0.719159280874362,0.11116734023129868,0.523840206185567
+hepatic,catboost_binary,all_visits_longitudinal,high,15,0.7227179656014664,0.10525642088967192,0.5663659793814433
+death,rsf,all_visits_longitudinal,high,15,0.9493715801305349,0.012654592277045613,0.9259818731117825
+death,xgb_cox,all_visits_longitudinal,high,15,0.928483644426348,0.036529066446030205,0.8424068767908309
+death,lgbm_binary,all_visits_longitudinal,high,15,0.7871202938822507,0.05244594416337441,0.7120343839541547
+death,catboost_binary,all_visits_longitudinal,high,15,0.7553619166358351,0.06610534197381898,0.6203438395415473

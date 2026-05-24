@@ -1,0 +1,24 @@
+{
+  "id": "xgb_cox_longitudinal_summary",
+  "model": "xgb_cox",
+  "feature_set": "longitudinal_summary",
+  "sampler": "TPE",
+  "inner_cv": "5-fold \u00d7 5-repeat",
+  "selection_metric": "mean \u2212 1\u00d7std of C-index",
+  "n_trials_complete": 30,
+  "n_trials_failed": 0,
+  "best_trial_number": 29,
+  "best_params": {
+    "n_estimators": 444,
+    "learning_rate": 0.013890990747050674,
+    "max_depth": 5,
+    "min_child_weight": 1.0288407478484667,
+    "subsample": 0.9361937553113701,
+    "colsample_bytree": 0.675639310110157,
+    "reg_lambda": 6.478763832062464
+  },
+  "best_mean": 0.7896700100684404,
+  "best_std": 0.08613909516442857,
+  "best_mean_minus_std": 0.7035309149040119,
+  "tuning_seconds": 1901.0
+}

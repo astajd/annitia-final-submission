@@ -1,0 +1,91 @@
+{
+  "submission_kind": "3-way blend (Tier-2 + Tier-4 + Tier-1 catboost) \u2014 Q2 alt third",
+  "hypothesis": "If equal-weight 3-way fails because xgb_cox_baseline_v1's signal is OOD-flavoured on test (LB 0.829), swap it for the most-different single Tier-1 model we have: catboost_bin_early_v1_v3 (OOF rank-corr 0.117 vs landmark, the lowest of any candidate). Pre-registered: LB > 0.880 \u2192 recipe is right and xgb_v1 was the wrong third; LB \u2248 0.83 \u2192 single Tier-1 thirds don't help on test regardless of which one.",
+  "hepatic": {
+    "ensemble_strategy": "1/3 rank-average across (a) landmark, (b) permissive, (c) catboost",
+    "components": {
+      "a_landmark_3y": {
+        "feature_set": "landmark_3y",
+        "model": "rsf",
+        "params": {
+          "n_estimators": 279,
+          "min_samples_leaf": 12,
+          "min_samples_split": 71,
+          "max_features": "log2"
+        },
+        "n_train": 1238,
+        "n_train_events": 32,
+        "n_features": 49
+      },
+      "b_permissive_ensemble": {
+        "members": [
+          {
+            "id": "rsf_longitudinal_summary",
+            "model": "rsf",
+            "feature_set": "longitudinal_summary"
+          },
+          {
+            "id": "xgb_cox_longitudinal_plus_meta",
+            "model": "xgb_cox",
+            "feature_set": "longitudinal_plus_meta"
+          },
+          {
+            "id": "xgb_cox_longitudinal_summary",
+            "model": "xgb_cox",
+            "feature_set": "longitudinal_summary"
+          }
+        ],
+        "n_train": 1253,
+        "n_train_events": 47
+      },
+      "c_third_catboost": {
+        "id": "catboost_bin_early_v1_v3",
+        "feature_set": "early_v1_v3",
+        "model": "catboost_bin",
+        "params": {
+          "iterations": 549,
+          "learning_rate": 0.02702898783568698,
+          "depth": 8,
+          "l2_leaf_reg": 2.634770870600858,
+          "horizon": 5
+        },
+        "n_train": 1253,
+        "n_train_events": 47,
+        "n_features": 55,
+        "oof_corr_vs_landmark": 0.117,
+        "oof_corr_vs_permissive": 0.651,
+        "selection_rationale": "Lowest OOF rank-corr vs landmark of any model in the 8-model audit (0.117); just-failed the <0.6 vs both anchors bar (0.651 vs permissive) but is the most-different-flavoured single model available."
+      }
+    },
+    "test_pairwise_rank_correlations": {
+      "landmark_vs_permissive": 0.4782573487429764,
+      "landmark_vs_catboost": 0.2768854130795033,
+      "permissive_vs_catboost": 0.5154490841966496
+    },
+    "spearman_vs_other_blends": {
+      "vs_2way_LB_0.880": 0.9233251932712108,
+      "vs_xgb_3way_LB_0.829": 0.8925418860411337
+    }
+  },
+  "death": {
+    "feature_set": "longitudinal_summary",
+    "model": "xgb_cox",
+    "params": {
+      "n_estimators": 300,
+      "learning_rate": 0.05
+    },
+    "death_mode": "censor_missing_death_at_last",
+    "n_features": 143
+  },
+  "Q1_diagnostic": {
+    "spearman_503020_vs_2way": 0.96586748886404,
+    "spearman_equal_vs_2way": 0.9258595994225793,
+    "spearman_503020_vs_equal": 0.9765783115461544,
+    "verdict": "corr=0.966 > 0.95: the 50/30/20 ordering is essentially the 2-way ordering. xgb_cox_v1 was *down-weighted* enough that the blend reverts to 2-way \u2014 re-weighting alone would give us back ~0.880 LB but no upside. Failure mode at equal weight was over-weighting the third member, not the component."
+  },
+  "reference_LBs": {
+    "phase2_blend_landmark_permissive": 0.88033,
+    "phase2_blend_3way_xgb_v1_equal": 0.829,
+    "phase2_landmark_3y": 0.8109
+  }
+}

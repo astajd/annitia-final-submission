@@ -1,0 +1,48 @@
+{
+  "label": "phase3_10_horizon_blend_v2",
+  "blend_id": "greedy_cap25_both",
+  "alpha": null,
+  "side": "both",
+  "components_hepatic": [
+    "NIT_plus_scores__hepatic__h1__lgbm_binary",
+    "v3_hepatic_schema__hepatic__h3__lgbm_binary__s4"
+  ],
+  "components_death": [
+    "current_state_v2__death__h5__catboost_binary__s3",
+    "NIT_plus_scores__death__h4__catboost_binary"
+  ],
+  "weights_hepatic": {
+    "_v3": 0.7905138339920948,
+    "NIT_plus_scores__hepatic__h1__lgbm_binary": 0.11857707509881421,
+    "v3_hepatic_schema__hepatic__h3__lgbm_binary__s4": 0.09090909090909091
+  },
+  "weights_death": {
+    "_v3": 0.7905138339920948,
+    "current_state_v2__death__h5__catboost_binary__s3": 0.11857707509881421,
+    "NIT_plus_scores__death__h4__catboost_binary": 0.09090909090909091
+  },
+  "hepatic_oof": 0.8500148794762424,
+  "death_oof": 0.9537190082644628,
+  "weighted_oof": 0.8811261181127085,
+  "hepatic_fold_std": 0.10840160154451017,
+  "hepatic_fold_min": 0.6,
+  "death_fold_std": 0.012349294597071831,
+  "death_fold_min": 0.9269356597600873,
+  "rho_test_with_phase3_9_horizon_blend": {
+    "hepatic": 0.993957073085552,
+    "death": 0.996739287001723,
+    "weighted": 0.9947917372604033
+  },
+  "rho_oof_with_phase3_9_horizon_blend": {
+    "hepatic": 0.9932476619978319,
+    "death": 0.9960330556875121
+  },
+  "delta_vs_phase3_9": {
+    "weighted_oof": 0.004329461348245522,
+    "hepatic_oof": 0.0048771616572429455,
+    "death_oof": 0.0030514939605847946
+  },
+  "uses_target_derived_features": false,
+  "rationale": "Best OOF improvement over phase3_9_horizon_blend, restricted to rank-space horizon blends with no target-derived features.",
+  "submission_csv": "gpt/submissions/20260428_0059_phase3_10_horizon_blend_v2.csv"
+}

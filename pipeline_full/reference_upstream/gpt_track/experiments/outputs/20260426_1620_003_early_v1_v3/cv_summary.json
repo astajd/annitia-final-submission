@@ -1,0 +1,12 @@
+{
+  "cindex_hepatic_mean": 0.7901580637150378,
+  "cindex_hepatic_std": 0.10259369479123708,
+  "cindex_hepatic_min": 0.4821705426356589,
+  "cindex_death_mean": 0.7654218128345094,
+  "cindex_death_std": 0.07178757332286018,
+  "cindex_death_min": 0.6480865224625624,
+  "score_mean": 0.7827371884508793,
+  "score_std": 0.07124795479866443,
+  "score_min": 0.5811701734957548,
+  "n_folds": 25
+}

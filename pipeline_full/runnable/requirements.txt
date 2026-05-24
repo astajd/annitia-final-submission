@@ -1,0 +1,23 @@
+# annitia-final-submission — runnable requirements.
+#
+# Two tiers:
+#   - "Minimal" is everything needed to re-run build_final_3.py + validate_reproduction.py
+#     against the cached intermediates (the verified path).
+#   - "Reference upstream" is what the upstream_scripts/ + reference_upstream/ trees
+#     would need to be re-runnable from raw — these are stochastic / library-version
+#     sensitive and are NOT used in the verified path. Pinned for documentary purposes;
+#     the exact env that produced the cached intermediates is not bit-pinned (this is a
+#     known gap — see audit/ and PROVENANCE_FINDINGS.md).
+
+# --- Minimal (verified path: build_final_3.py + validate_reproduction.py) ---
+numpy>=2.0,<3.0
+pandas>=2.2,<4.0
+scipy>=1.13,<2.0
+scikit-learn>=1.5,<2.0
+scikit-survival>=0.21,<0.30
+pyyaml>=6.0,<7.0
+
+# --- Reference upstream retraining (NOT required for verified path) ---
+lightgbm>=4.0,<5.0
+xgboost>=2.0,<4.0
+catboost>=1.2,<2.0

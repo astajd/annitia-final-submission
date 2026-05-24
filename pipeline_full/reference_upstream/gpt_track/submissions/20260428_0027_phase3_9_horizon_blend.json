@@ -1,0 +1,15 @@
+{
+  "label": "phase3_9_horizon_blend",
+  "blend": "alpha=0.85_both",
+  "alpha": 0.85,
+  "side": "both",
+  "hep_best_run": "v3_hepatic_schema__hepatic__h3__lgbm_binary",
+  "dea_best_run": "current_state_v2__death__h5__catboost_binary",
+  "hepatic_oof": 0.8451377178189995,
+  "death_oof": 0.950667514303878,
+  "weighted_oof": 0.876796656764463,
+  "uses_target_derived_features": false,
+  "recommended": true,
+  "promotion_reason": "weighted \u0394=+0.0029, hepatic \u0394=+0.0037, contributing rho=0.422, hep_fold_std \u0394=+nan",
+  "submission_csv": "gpt/submissions/20260428_0027_phase3_9_horizon_blend.csv"
+}

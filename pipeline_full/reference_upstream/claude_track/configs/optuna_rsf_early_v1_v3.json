@@ -1,0 +1,21 @@
+{
+  "id": "rsf_early_v1_v3",
+  "model": "rsf",
+  "feature_set": "early_v1_v3",
+  "sampler": "TPE",
+  "inner_cv": "5-fold \u00d7 5-repeat",
+  "selection_metric": "mean \u2212 1\u00d7std of C-index",
+  "n_trials_complete": 50,
+  "n_trials_failed": 0,
+  "best_trial_number": 42,
+  "best_params": {
+    "n_estimators": 283,
+    "min_samples_leaf": 19,
+    "min_samples_split": 14,
+    "max_features": "log2"
+  },
+  "best_mean": 0.7743575022343827,
+  "best_std": 0.06950527880873698,
+  "best_mean_minus_std": 0.7048522234256457,
+  "tuning_seconds": 462.4
+}

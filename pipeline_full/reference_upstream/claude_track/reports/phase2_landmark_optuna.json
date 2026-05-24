@@ -1,0 +1,28 @@
+{
+  "task": "Task 2 \u2014 Optuna tune of landmark-3y RSF on Filter B",
+  "filter_B_cohort": {
+    "n": 831,
+    "events": 27
+  },
+  "n_trials_complete": 30,
+  "best_inner_cv_5x5": {
+    "mean": 0.880675804661483,
+    "std": 0.06403389313040338,
+    "mean_minus_std": 0.8166419115310796,
+    "best_params": {
+      "n_estimators": 352,
+      "min_samples_leaf": 10,
+      "min_samples_split": 67,
+      "max_features": "log2"
+    }
+  },
+  "final_5x10_cv": {
+    "mean": 0.8823712413381046,
+    "std": 0.06941958411933945,
+    "mean_minus_std": 0.8129516572187652
+  },
+  "filter_B_baseline_ms": 0.812,
+  "delta_ms_vs_baseline": 0.0009516572187651118,
+  "improvement_threshold": 0.01,
+  "build_landmarktuned_submission": false
+}

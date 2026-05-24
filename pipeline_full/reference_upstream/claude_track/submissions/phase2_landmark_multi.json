@@ -1,0 +1,85 @@
+{
+  "submission_kind": "multi-landmark candidate (Tier 2)",
+  "hypothesis": "Rank-averaging RSF predictions across landmarks [1.0, 2.0, 3.0] reduces the per-fold instability seen at single-landmark 3y (audit: spread 0.59\u20130.97 across 50 folds). Variance reduction expected if the three landmark predictions are < ~0.95 rank-correlated.",
+  "hepatic": {
+    "ensemble_strategy": "rank-average across landmarks",
+    "landmarks": [
+      1.0,
+      2.0,
+      3.0
+    ],
+    "filter": "B (event-free at landmark AND has data through landmark)",
+    "rsf_params": {
+      "n_estimators": 279,
+      "min_samples_leaf": 12,
+      "min_samples_split": 71,
+      "max_features": "log2"
+    },
+    "rsf_params_source": "Optuna best for rsf_baseline_v1 (Experiment 2)",
+    "filter_B_cv_per_landmark": {
+      "1.0": {
+        "n_train": 1106,
+        "n_train_events": 39,
+        "cv_mean": 0.8345654762266764,
+        "cv_std": 0.09915956070784922,
+        "cv_mean_minus_std": 0.7354059155188272,
+        "n_features": 49
+      },
+      "2.0": {
+        "n_train": 977,
+        "n_train_events": 32,
+        "cv_mean": 0.8175401601919119,
+        "cv_std": 0.11041343159787557,
+        "cv_mean_minus_std": 0.7071267285940364,
+        "n_features": 49
+      },
+      "3.0": {
+        "n_train": 831,
+        "n_train_events": 27,
+        "cv_mean": 0.8823303476486477,
+        "cv_std": 0.07029672025478677,
+        "cv_mean_minus_std": 0.812033627393861,
+        "n_features": 49
+      }
+    },
+    "test_predictability_per_landmark": [
+      {
+        "landmark_yrs": 1.0,
+        "test_rows_reaching_landmark": 414,
+        "test_rows_OOD_below_landmark": 9
+      },
+      {
+        "landmark_yrs": 2.0,
+        "test_rows_reaching_landmark": 385,
+        "test_rows_OOD_below_landmark": 38
+      },
+      {
+        "landmark_yrs": 3.0,
+        "test_rows_reaching_landmark": 333,
+        "test_rows_OOD_below_landmark": 90
+      }
+    ],
+    "pairwise_test_rank_correlations": {
+      "1.0y_vs_2.0y": 0.8767813734499491,
+      "1.0y_vs_3.0y": 0.8079163979266909,
+      "2.0y_vs_3.0y": 0.8701014013798807
+    }
+  },
+  "death": {
+    "feature_set": "longitudinal_summary",
+    "model": "xgb_cox",
+    "params": {
+      "n_estimators": 300,
+      "learning_rate": 0.05
+    },
+    "death_mode": "censor_missing_death_at_last",
+    "n_features": 143,
+    "cv_train_side_cindex": "0.948 \u00b1 0.018 (Phase 2 grid)"
+  },
+  "reference_LBs": {
+    "phase2_landmark_3y_alone": 0.8109,
+    "phase1_ensemble": 0.7986,
+    "phase2_honest_ensemble": 0.7509
+  },
+  "predicted_LB_band": "0.81\u20130.84 (max corr=0.877, partial complementarity \u2014 modest gain over 3y alone)"
+}

@@ -1,0 +1,397 @@
+{
+  "endpoints": {
+    "hepatic": {
+      "method": "greedy",
+      "weights": {
+        "phase3_current_state_v2::hepatic__rsf__s0": 1.0,
+        "phase3_current_state_v2::hepatic__xgb_aft__s0": 1.0,
+        "phase3_current_state_v2::hepatic__rsf__s1": 1.0
+      },
+      "table": [
+        {
+          "component": "phase3_current_state_v2::hepatic__rsf__s0",
+          "weight": 1.0,
+          "model": "rsf (s0)",
+          "feature_set": "current_state_v2",
+          "oof_cindex": 0.8356809840293622,
+          "fold_mean": 0.8305289075284964,
+          "fold_std": 0.10305990545362122,
+          "fold_min": 0.6055776892430279,
+          "fold_max": 0.9622093023255814,
+          "rank_corr_with_final_oof": 0.9523167541443156,
+          "rank_corr_with_final_test": 0.9735107412221918
+        },
+        {
+          "component": "phase3_current_state_v2::hepatic__rsf__s1",
+          "weight": 1.0,
+          "model": "rsf (s1)",
+          "feature_set": "current_state_v2",
+          "oof_cindex": 0.8332837350791918,
+          "fold_mean": 0.8340493871364771,
+          "fold_std": 0.1066193997637927,
+          "fold_min": 0.6139534883720931,
+          "fold_max": 0.9552845528455285,
+          "rank_corr_with_final_oof": 0.946858766678189,
+          "rank_corr_with_final_test": 0.969045129075551
+        },
+        {
+          "component": "phase3_current_state_v2::hepatic__xgb_aft__s0",
+          "weight": 1.0,
+          "model": "xgb_aft (s0)",
+          "feature_set": "current_state_v2",
+          "oof_cindex": 0.7998545117878517,
+          "fold_mean": 0.8025479605004704,
+          "fold_std": 0.10473054262059762,
+          "fold_min": 0.5953488372093023,
+          "fold_max": 0.9411337209302325,
+          "rank_corr_with_final_oof": 0.8380771634759981,
+          "rank_corr_with_final_test": 0.8835149142319185
+        }
+      ],
+      "pairwise_rank_corr": {
+        "phase3_current_state_v2::hepatic__rsf__s0": {
+          "phase3_current_state_v2::hepatic__rsf__s0": 1.0,
+          "phase3_current_state_v2::hepatic__xgb_aft__s0": 0.658,
+          "phase3_current_state_v2::hepatic__rsf__s1": 0.952
+        },
+        "phase3_current_state_v2::hepatic__xgb_aft__s0": {
+          "phase3_current_state_v2::hepatic__rsf__s0": 0.658,
+          "phase3_current_state_v2::hepatic__xgb_aft__s0": 1.0,
+          "phase3_current_state_v2::hepatic__rsf__s1": 0.644
+        },
+        "phase3_current_state_v2::hepatic__rsf__s1": {
+          "phase3_current_state_v2::hepatic__rsf__s0": 0.952,
+          "phase3_current_state_v2::hepatic__xgb_aft__s0": 0.644,
+          "phase3_current_state_v2::hepatic__rsf__s1": 1.0
+        }
+      },
+      "final_oof_cindex": 0.8377641107033033
+    },
+    "death": {
+      "method": "seed_bagged",
+      "weights": {
+        "phase3_current_state_v2::death__rsf__s0": 0.2727272727272728,
+        "phase3_current_state_v2::death__xgb_cox__s0": 0.21212121212121215,
+        "phase3_current_state_v2::death__xgb_aft__s0": 0.10606060606060606,
+        "phase3_current_state_v2::death__lgbm_binary__s0": 0.015151515151515154,
+        "phase3_current_state_v2::death__xgb_binary__s0": 0.015151515151515154,
+        "phase3_current_state_v2::death__rsf__s1": 0.13636363636363635,
+        "phase3_current_state_v2::death__xgb_cox__s1": 0.196969696969697,
+        "phase3_current_state_v2::death__xgb_aft__s1": 0.030303030303030307,
+        "phase3_current_state_v2::death__lgbm_binary__s1": 0.015151515151515154
+      },
+      "table": [
+        {
+          "component": "phase3_current_state_v2::death__rsf__s0",
+          "weight": 0.2727272727272728,
+          "model": "rsf (s0)",
+          "feature_set": "current_state_v2",
+          "oof_cindex": 0.9267641449459632,
+          "fold_mean": 0.9266034803557371,
+          "fold_std": 0.01612070537175304,
+          "fold_min": 0.9009483667017913,
+          "fold_max": 0.9611919611919612,
+          "rank_corr_with_final_oof": 0.8788902177133153,
+          "rank_corr_with_final_test": 0.9344891213423617
+        },
+        {
+          "component": "phase3_current_state_v2::death__rsf__s1",
+          "weight": 0.13636363636363635,
+          "model": "rsf (s1)",
+          "feature_set": "current_state_v2",
+          "oof_cindex": 0.9261707988980716,
+          "fold_mean": 0.9242184810912801,
+          "fold_std": 0.016137501423138384,
+          "fold_min": 0.8935721812434141,
+          "fold_max": 0.9646569646569647,
+          "rank_corr_with_final_oof": 0.8793102016095541,
+          "rank_corr_with_final_test": 0.9368370684226247
+        },
+        {
+          "component": "phase3_current_state_v2::death__xgb_cox__s0",
+          "weight": 0.21212121212121215,
+          "model": "xgb_cox (s0)",
+          "feature_set": "current_state_v2",
+          "oof_cindex": 0.9261284170375079,
+          "fold_mean": 0.9290522352224363,
+          "fold_std": 0.029391812688021258,
+          "fold_min": 0.8620689655172413,
+          "fold_max": 0.9716466739367503,
+          "rank_corr_with_final_oof": 0.9082795276188004,
+          "rank_corr_with_final_test": 0.9606747006442783
+        },
+        {
+          "component": "phase3_current_state_v2::death__xgb_cox__s1",
+          "weight": 0.196969696969697,
+          "model": "xgb_cox (s1)",
+          "feature_set": "current_state_v2",
+          "oof_cindex": 0.9241788514515787,
+          "fold_mean": 0.926347269509238,
+          "fold_std": 0.034497793839137224,
+          "fold_min": 0.8403575989782887,
+          "fold_max": 0.9735449735449735,
+          "rank_corr_with_final_oof": 0.860325819999568,
+          "rank_corr_with_final_test": 0.9587997042116231
+        },
+        {
+          "component": "phase3_current_state_v2::death__xgb_aft__s0",
+          "weight": 0.10606060606060606,
+          "model": "xgb_aft (s0)",
+          "feature_set": "current_state_v2",
+          "oof_cindex": 0.9236702691248145,
+          "fold_mean": 0.9222839271797053,
+          "fold_std": 0.021709818730621822,
+          "fold_min": 0.8756815703380589,
+          "fold_max": 0.9578503688092729,
+          "rank_corr_with_final_oof": 0.8323470831965502,
+          "rank_corr_with_final_test": 0.869412348911056
+        },
+        {
+          "component": "phase3_current_state_v2::death__xgb_aft__s1",
+          "weight": 0.030303030303030307,
+          "model": "xgb_aft (s1)",
+          "feature_set": "current_state_v2",
+          "oof_cindex": 0.9236702691248145,
+          "fold_mean": 0.9222839271797053,
+          "fold_std": 0.021709818730621822,
+          "fold_min": 0.8756815703380589,
+          "fold_max": 0.9578503688092729,
+          "rank_corr_with_final_oof": 0.8323470831965502,
+          "rank_corr_with_final_test": 0.8690814578612546
+        },
+        {
+          "component": "phase3_current_state_v2::death__lgbm_binary__s0",
+          "weight": 0.015151515151515154,
+          "model": "lgbm_binary (s0)",
+          "feature_set": "current_state_v2",
+          "oof_cindex": 0.7781733418097054,
+          "fold_mean": 0.7723850399736816,
+          "fold_std": 0.05464843070509432,
+          "fold_min": 0.6948424068767909,
+          "fold_max": 0.8912228057014253,
+          "rank_corr_with_final_oof": 0.101703924044319,
+          "rank_corr_with_final_test": 0.1780344469156895
+        },
+        {
+          "component": "phase3_current_state_v2::death__lgbm_binary__s1",
+          "weight": 0.015151515151515154,
+          "model": "lgbm_binary (s1)",
+          "feature_set": "current_state_v2",
+          "oof_cindex": 0.7775376139012503,
+          "fold_mean": 0.7705294211908448,
+          "fold_std": 0.05821572550970814,
+          "fold_min": 0.6819484240687679,
+          "fold_max": 0.8927231807951987,
+          "rank_corr_with_final_oof": 0.09910836500835109,
+          "rank_corr_with_final_test": 0.17579098340122387
+        },
+        {
+          "component": "phase3_current_state_v2::death__xgb_binary__s0",
+          "weight": 0.015151515151515154,
+          "model": "xgb_binary (s0)",
+          "feature_set": "current_state_v2",
+          "oof_cindex": 0.7738927738927739,
+          "fold_mean": 0.7650770211533192,
+          "fold_std": 0.05407943568218436,
+          "fold_min": 0.673352435530086,
+          "fold_max": 0.8694673668417104,
+          "rank_corr_with_final_oof": 0.10196909156368238,
+          "rank_corr_with_final_test": 0.17056379268684801
+        }
+      ],
+      "pairwise_rank_corr": {
+        "phase3_current_state_v2::death__rsf__s0": {
+          "phase3_current_state_v2::death__rsf__s0": 1.0,
+          "phase3_current_state_v2::death__xgb_cox__s0": 0.68,
+          "phase3_current_state_v2::death__xgb_aft__s0": 0.602,
+          "phase3_current_state_v2::death__lgbm_binary__s0": -0.176,
+          "phase3_current_state_v2::death__xgb_binary__s0": -0.19,
+          "phase3_current_state_v2::death__rsf__s1": 0.991,
+          "phase3_current_state_v2::death__xgb_cox__s1": 0.615,
+          "phase3_current_state_v2::death__xgb_aft__s1": 0.602,
+          "phase3_current_state_v2::death__lgbm_binary__s1": -0.179
+        },
+        "phase3_current_state_v2::death__xgb_cox__s0": {
+          "phase3_current_state_v2::death__rsf__s0": 0.68,
+          "phase3_current_state_v2::death__xgb_cox__s0": 1.0,
+          "phase3_current_state_v2::death__xgb_aft__s0": 0.754,
+          "phase3_current_state_v2::death__lgbm_binary__s0": 0.129,
+          "phase3_current_state_v2::death__xgb_binary__s0": 0.134,
+          "phase3_current_state_v2::death__rsf__s1": 0.692,
+          "phase3_current_state_v2::death__xgb_cox__s1": 0.853,
+          "phase3_current_state_v2::death__xgb_aft__s1": 0.754,
+          "phase3_current_state_v2::death__lgbm_binary__s1": 0.128
+        },
+        "phase3_current_state_v2::death__xgb_aft__s0": {
+          "phase3_current_state_v2::death__rsf__s0": 0.602,
+          "phase3_current_state_v2::death__xgb_cox__s0": 0.754,
+          "phase3_current_state_v2::death__xgb_aft__s0": 1.0,
+          "phase3_current_state_v2::death__lgbm_binary__s0": 0.497,
+          "phase3_current_state_v2::death__xgb_binary__s0": 0.514,
+          "phase3_current_state_v2::death__rsf__s1": 0.596,
+          "phase3_current_state_v2::death__xgb_cox__s1": 0.713,
+          "phase3_current_state_v2::death__xgb_aft__s1": 1.0,
+          "phase3_current_state_v2::death__lgbm_binary__s1": 0.495
+        },
+        "phase3_current_state_v2::death__lgbm_binary__s0": {
+          "phase3_current_state_v2::death__rsf__s0": -0.176,
+          "phase3_current_state_v2::death__xgb_cox__s0": 0.129,
+          "phase3_current_state_v2::death__xgb_aft__s0": 0.497,
+          "phase3_current_state_v2::death__lgbm_binary__s0": 1.0,
+          "phase3_current_state_v2::death__xgb_binary__s0": 0.953,
+          "phase3_current_state_v2::death__rsf__s1": -0.192,
+          "phase3_current_state_v2::death__xgb_cox__s1": 0.115,
+          "phase3_current_state_v2::death__xgb_aft__s1": 0.497,
+          "phase3_current_state_v2::death__lgbm_binary__s1": 0.987
+        },
+        "phase3_current_state_v2::death__xgb_binary__s0": {
+          "phase3_current_state_v2::death__rsf__s0": -0.19,
+          "phase3_current_state_v2::death__xgb_cox__s0": 0.134,
+          "phase3_current_state_v2::death__xgb_aft__s0": 0.514,
+          "phase3_current_state_v2::death__lgbm_binary__s0": 0.953,
+          "phase3_current_state_v2::death__xgb_binary__s0": 1.0,
+          "phase3_current_state_v2::death__rsf__s1": -0.206,
+          "phase3_current_state_v2::death__xgb_cox__s1": 0.126,
+          "phase3_current_state_v2::death__xgb_aft__s1": 0.514,
+          "phase3_current_state_v2::death__lgbm_binary__s1": 0.953
+        },
+        "phase3_current_state_v2::death__rsf__s1": {
+          "phase3_current_state_v2::death__rsf__s0": 0.991,
+          "phase3_current_state_v2::death__xgb_cox__s0": 0.692,
+          "phase3_current_state_v2::death__xgb_aft__s0": 0.596,
+          "phase3_current_state_v2::death__lgbm_binary__s0": -0.192,
+          "phase3_current_state_v2::death__xgb_binary__s0": -0.206,
+          "phase3_current_state_v2::death__rsf__s1": 1.0,
+          "phase3_current_state_v2::death__xgb_cox__s1": 0.616,
+          "phase3_current_state_v2::death__xgb_aft__s1": 0.596,
+          "phase3_current_state_v2::death__lgbm_binary__s1": -0.196
+        },
+        "phase3_current_state_v2::death__xgb_cox__s1": {
+          "phase3_current_state_v2::death__rsf__s0": 0.615,
+          "phase3_current_state_v2::death__xgb_cox__s0": 0.853,
+          "phase3_current_state_v2::death__xgb_aft__s0": 0.713,
+          "phase3_current_state_v2::death__lgbm_binary__s0": 0.115,
+          "phase3_current_state_v2::death__xgb_binary__s0": 0.126,
+          "phase3_current_state_v2::death__rsf__s1": 0.616,
+          "phase3_current_state_v2::death__xgb_cox__s1": 1.0,
+          "phase3_current_state_v2::death__xgb_aft__s1": 0.713,
+          "phase3_current_state_v2::death__lgbm_binary__s1": 0.113
+        },
+        "phase3_current_state_v2::death__xgb_aft__s1": {
+          "phase3_current_state_v2::death__rsf__s0": 0.602,
+          "phase3_current_state_v2::death__xgb_cox__s0": 0.754,
+          "phase3_current_state_v2::death__xgb_aft__s0": 1.0,
+          "phase3_current_state_v2::death__lgbm_binary__s0": 0.497,
+          "phase3_current_state_v2::death__xgb_binary__s0": 0.514,
+          "phase3_current_state_v2::death__rsf__s1": 0.596,
+          "phase3_current_state_v2::death__xgb_cox__s1": 0.713,
+          "phase3_current_state_v2::death__xgb_aft__s1": 1.0,
+          "phase3_current_state_v2::death__lgbm_binary__s1": 0.495
+        },
+        "phase3_current_state_v2::death__lgbm_binary__s1": {
+          "phase3_current_state_v2::death__rsf__s0": -0.179,
+          "phase3_current_state_v2::death__xgb_cox__s0": 0.128,
+          "phase3_current_state_v2::death__xgb_aft__s0": 0.495,
+          "phase3_current_state_v2::death__lgbm_binary__s0": 0.987,
+          "phase3_current_state_v2::death__xgb_binary__s0": 0.953,
+          "phase3_current_state_v2::death__rsf__s1": -0.196,
+          "phase3_current_state_v2::death__xgb_cox__s1": 0.113,
+          "phase3_current_state_v2::death__xgb_aft__s1": 0.495,
+          "phase3_current_state_v2::death__lgbm_binary__s1": 1.0
+        }
+      },
+      "final_oof_cindex": 0.9494808222080949
+    }
+  },
+  "top_features": {
+    "rsf__hepatic": [],
+    "xgb_aft__hepatic": [],
+    "rsf__death": [],
+    "xgb_cox__death": [
+      {
+        "feature": "ggt_min",
+        "importance": 0.0277086570858955,
+        "group": "labs_biomarker",
+        "suspicious": false
+      },
+      {
+        "feature": "miss_fibs_stiffness_med_BM_1",
+        "importance": 0.024958224967122,
+        "group": "missingness_pattern",
+        "suspicious": false
+      },
+      {
+        "feature": "ggt_latest",
+        "importance": 0.0234367437660694,
+        "group": "labs_biomarker",
+        "suspicious": false
+      },
+      {
+        "feature": "ast_alt_ratio_v3",
+        "importance": 0.0226492062211036,
+        "group": "derived_fibrosis_score",
+        "suspicious": false
+      },
+      {
+        "feature": "BMI_max",
+        "importance": 0.0220970511436462,
+        "group": "labs_biomarker",
+        "suspicious": false
+      },
+      {
+        "feature": "fibrotest_BM_2_std",
+        "importance": 0.0217250939458608,
+        "group": "nit_liver_stiffness",
+        "suspicious": false
+      },
+      {
+        "feature": "chol_age_latest",
+        "importance": 0.0199740398675203,
+        "group": "labs_biomarker",
+        "suspicious": false
+      },
+      {
+        "feature": "followup_span",
+        "importance": 0.0192046072334051,
+        "group": "visit_history_current_state",
+        "suspicious": true
+      },
+      {
+        "feature": "plt_latest",
+        "importance": 0.0172992795705795,
+        "group": "labs_biomarker",
+        "suspicious": false
+      },
+      {
+        "feature": "fib4_v1",
+        "importance": 0.0150590064004063,
+        "group": "derived_fibrosis_score",
+        "suspicious": false
+      },
+      {
+        "feature": "x_stiffness_astalt_latest",
+        "importance": 0.0148398810997605,
+        "group": "interaction",
+        "suspicious": false
+      },
+      {
+        "feature": "miss_visit_3",
+        "importance": 0.0133141130208969,
+        "group": "missingness_pattern",
+        "suspicious": true
+      }
+    ],
+    "xgb_aft__death": [],
+    "lgbm_binary__death": [],
+    "xgb_binary__death": []
+  },
+  "feature_groups": {
+    "labs_biomarker": 108,
+    "missingness_pattern": 36,
+    "nit_liver_stiffness": 36,
+    "derived_fibrosis_score": 18,
+    "interaction": 10,
+    "demographics_comorbidities": 7,
+    "visit_history_current_state": 7
+  }
+}

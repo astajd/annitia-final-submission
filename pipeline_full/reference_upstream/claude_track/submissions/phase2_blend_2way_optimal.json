@@ -1,0 +1,75 @@
+{
+  "submission_kind": "2-way blend with OOF-stacked weights",
+  "weight_landmark": 0.3,
+  "weight_permissive": 0.7,
+  "cv_diagnostic": {
+    "w_star": 0.3,
+    "mean": 0.8136340275993658,
+    "std": 0.09123598468715562,
+    "mean_minus_std": 0.7223980429122101
+  },
+  "lofo_diagnostic": {
+    "mean": 0.8100416801185873,
+    "std": 0.09321146989756275,
+    "mean_minus_std": 0.7168302102210246,
+    "median_pick": 0.35,
+    "pick_counts": {
+      "0.30": 16,
+      "0.35": 17,
+      "0.40": 17
+    }
+  },
+  "hepatic": {
+    "ensemble_strategy": "0.30*rank(landmark) + 0.70*rank(permissive)",
+    "components": {
+      "a_landmark_3y": {
+        "feature_set": "landmark_3y",
+        "model": "rsf",
+        "params": {
+          "n_estimators": 279,
+          "min_samples_leaf": 12,
+          "min_samples_split": 71,
+          "max_features": "log2"
+        },
+        "n_train": 1238,
+        "n_train_events": 32,
+        "n_features": 49
+      },
+      "b_permissive": {
+        "members": [
+          {
+            "id": "rsf_longitudinal_summary",
+            "model": "rsf",
+            "feature_set": "longitudinal_summary"
+          },
+          {
+            "id": "xgb_cox_longitudinal_plus_meta",
+            "model": "xgb_cox",
+            "feature_set": "longitudinal_plus_meta"
+          },
+          {
+            "id": "xgb_cox_longitudinal_summary",
+            "model": "xgb_cox",
+            "feature_set": "longitudinal_summary"
+          }
+        ],
+        "n_train": 1253,
+        "n_train_events": 47
+      }
+    }
+  },
+  "death": {
+    "feature_set": "longitudinal_summary",
+    "model": "xgb_cox",
+    "params": {
+      "n_estimators": 300,
+      "learning_rate": 0.05
+    },
+    "death_mode": "censor_missing_death_at_last",
+    "n_features": 143
+  },
+  "reference_LBs": {
+    "phase2_blend_landmark_permissive_50_50": 0.88033,
+    "phase2_landmark_3y": 0.8109
+  }
+}

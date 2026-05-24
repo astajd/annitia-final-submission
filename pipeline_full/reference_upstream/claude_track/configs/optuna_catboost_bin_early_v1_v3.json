@@ -1,0 +1,22 @@
+{
+  "id": "catboost_bin_early_v1_v3",
+  "model": "catboost_bin",
+  "feature_set": "early_v1_v3",
+  "sampler": "TPE",
+  "inner_cv": "5-fold \u00d7 5-repeat",
+  "selection_metric": "mean \u2212 1\u00d7std of C-index",
+  "n_trials_complete": 50,
+  "n_trials_failed": 0,
+  "best_trial_number": 45,
+  "best_params": {
+    "iterations": 549,
+    "learning_rate": 0.02702898783568698,
+    "depth": 8,
+    "l2_leaf_reg": 2.634770870600858,
+    "horizon": 5
+  },
+  "best_mean": 0.7473785533409036,
+  "best_std": 0.07415486060868354,
+  "best_mean_minus_std": 0.6732236927322202,
+  "tuning_seconds": 544.5
+}

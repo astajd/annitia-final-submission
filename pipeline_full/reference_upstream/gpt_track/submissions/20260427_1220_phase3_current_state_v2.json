@@ -1,0 +1,74 @@
+{
+  "label": "phase3_current_state_v2",
+  "description": "Endpoint-specific ensemble built only from the current_state_v2 sweep. Multi-seed runs over CatBoost / LightGBM / XGB-Cox / XGB-binary / XGB-AFT / RSF.",
+  "leakage_tag": "moderate-high (uses current age / last observed age and missingness, by spec)",
+  "submission_csv": "gpt/submissions/20260427_1220_phase3_current_state_v2.csv",
+  "uses_target_derived_features": false,
+  "feature_sets": [
+    "current_state_v2"
+  ],
+  "experiments": [
+    "20260427_1154_phase3_current_state_v2"
+  ],
+  "hepatic": {
+    "method": "greedy",
+    "components": [
+      "phase3_current_state_v2::hepatic__rsf__s0",
+      "phase3_current_state_v2::hepatic__xgb_aft__s0",
+      "phase3_current_state_v2::hepatic__rsf__s1"
+    ],
+    "weights": {
+      "phase3_current_state_v2::hepatic__rsf__s0": 1.0,
+      "phase3_current_state_v2::hepatic__xgb_aft__s0": 1.0,
+      "phase3_current_state_v2::hepatic__rsf__s1": 1.0
+    },
+    "oof_cindex": 0.8377641107033033
+  },
+  "death": {
+    "method": "seed_bagged",
+    "components": [
+      "phase3_current_state_v2::death__rsf__s0",
+      "phase3_current_state_v2::death__xgb_cox__s0",
+      "phase3_current_state_v2::death__xgb_aft__s0",
+      "phase3_current_state_v2::death__lgbm_binary__s0",
+      "phase3_current_state_v2::death__xgb_binary__s0",
+      "phase3_current_state_v2::death__rsf__s1",
+      "phase3_current_state_v2::death__xgb_cox__s1",
+      "phase3_current_state_v2::death__xgb_aft__s1",
+      "phase3_current_state_v2::death__lgbm_binary__s1"
+    ],
+    "weights": {
+      "phase3_current_state_v2::death__rsf__s0": 0.2727272727272728,
+      "phase3_current_state_v2::death__xgb_cox__s0": 0.21212121212121215,
+      "phase3_current_state_v2::death__xgb_aft__s0": 0.10606060606060606,
+      "phase3_current_state_v2::death__lgbm_binary__s0": 0.015151515151515154,
+      "phase3_current_state_v2::death__xgb_binary__s0": 0.015151515151515154,
+      "phase3_current_state_v2::death__rsf__s1": 0.13636363636363635,
+      "phase3_current_state_v2::death__xgb_cox__s1": 0.196969696969697,
+      "phase3_current_state_v2::death__xgb_aft__s1": 0.030303030303030307,
+      "phase3_current_state_v2::death__lgbm_binary__s1": 0.015151515151515154
+    },
+    "oof_cindex": 0.9494808222080949
+  },
+  "weighted_score_cv": 0.8712791241547407,
+  "all_methods_oof": {
+    "hepatic": {
+      "equal": 0.794200310815726,
+      "cv_weighted": 0.8162880666600536,
+      "greedy": 0.8377641107033033,
+      "capped": 0.8251165558972324,
+      "seed_bagged": 0.836325761333201
+    },
+    "death": {
+      "equal": 0.9061029879211697,
+      "cv_weighted": 0.9417673235855054,
+      "greedy": 0.948823903369358,
+      "capped": 0.9452002542911634,
+      "seed_bagged": 0.9494808222080949
+    }
+  },
+  "rank_corr_with_public_best": {
+    "hepatic": 0.8494508528719914,
+    "death": 0.9552375170326557
+  }
+}

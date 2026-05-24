@@ -1,0 +1,26 @@
+{
+  "submission_kind": "2-way blend, finer-grid optimal weight",
+  "weight_landmark": 0.29,
+  "weight_permissive": 0.71,
+  "cv_diagnostic": {
+    "w": 0.29,
+    "mean": 0.8147478066358375,
+    "std": 0.09122715101138762,
+    "mean_minus_std": 0.7235206556244498,
+    "delta_vs_0p30_w": 0.010000000000000009,
+    "delta_vs_0p30_ms": 0.00112065562444974
+  },
+  "vs_phase2_blend_2way_optimal_LB_0.8965": {
+    "weight_change": -0.010000000000000009,
+    "ms_change": 0.00112065562444974
+  },
+  "death": {
+    "feature_set": "longitudinal_summary",
+    "model": "xgb_cox",
+    "params": {
+      "n_estimators": 300,
+      "learning_rate": 0.05
+    },
+    "death_mode": "censor_missing_death_at_last"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "id": "rsf_landmark_3y",
+  "model": "rsf",
+  "feature_set": "landmark_3y",
+  "cohort": "filter B (n=831, events=27)",
+  "sampler": "TPE",
+  "inner_cv": "5-fold \u00d7 5-repeat",
+  "selection_metric": "mean \u2212 1\u00d7std of C-index",
+  "n_trials_complete": 30,
+  "best_trial_number": 24,
+  "best_params": {
+    "n_estimators": 352,
+    "min_samples_leaf": 10,
+    "min_samples_split": 67,
+    "max_features": "log2"
+  },
+  "best_mean": 0.880675804661483,
+  "best_std": 0.06403389313040338,
+  "best_mean_minus_std": 0.8166419115310796
+}

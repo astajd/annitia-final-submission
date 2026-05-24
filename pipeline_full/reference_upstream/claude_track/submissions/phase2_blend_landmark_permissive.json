@@ -1,0 +1,69 @@
+{
+  "submission_kind": "blend candidate \u2014 Tier-2 + Tier-4",
+  "hypothesis": "Landmark (Tier 2 fixed-reference-time) and permissive (Tier 4 organizer-blessed full-trajectory) features carry partially complementary signal. Blend should beat single-component LBs if rank-correlation is below ~0.95.",
+  "hepatic": {
+    "ensemble_strategy": "50/50 rank-average across (a) and (b)",
+    "spearman_rank_correlation_a_vs_b": 0.4782573487429764,
+    "component_a_landmark_3y": {
+      "feature_set": "landmark_3y",
+      "model": "rsf",
+      "params": {
+        "n_estimators": 279,
+        "min_samples_leaf": 12,
+        "min_samples_split": 71,
+        "max_features": "log2"
+      },
+      "n_train": 1238,
+      "n_train_events": 32,
+      "n_features": 49,
+      "cv_mean": 0.8798,
+      "cv_std": 0.065,
+      "cv_mean_minus_std": 0.8148
+    },
+    "component_b_permissive": {
+      "members": [
+        {
+          "id": "rsf_longitudinal_summary",
+          "model": "rsf",
+          "feature_set": "longitudinal_summary"
+        },
+        {
+          "id": "xgb_cox_longitudinal_plus_meta",
+          "model": "xgb_cox",
+          "feature_set": "longitudinal_plus_meta"
+        },
+        {
+          "id": "xgb_cox_longitudinal_summary",
+          "model": "xgb_cox",
+          "feature_set": "longitudinal_summary"
+        }
+      ],
+      "n_train": 1253,
+      "n_train_events": 47,
+      "cv_mean": 0.8103,
+      "cv_std": 0.0906,
+      "cv_mean_minus_std": 0.7197
+    }
+  },
+  "death": {
+    "feature_set": "longitudinal_summary",
+    "model": "xgb_cox",
+    "params": {
+      "n_estimators": 300,
+      "learning_rate": 0.05
+    },
+    "death_mode": "censor_missing_death_at_last",
+    "n_features": 143,
+    "cv_train_side_cindex": "0.948 \u00b1 0.018"
+  },
+  "reference_LBs": {
+    "phase2_landmark_3y_alone": 0.8109,
+    "phase2_permissive_ensemble_alone": "pending",
+    "phase1_ensemble": 0.7986
+  },
+  "implied_cv_components": {
+    "landmark_alone_weighted": 0.90026,
+    "permissive_alone_weighted": 0.85161
+  },
+  "predicted_LB_band": "0.82\u20130.85 (strong complementarity expected)"
+}

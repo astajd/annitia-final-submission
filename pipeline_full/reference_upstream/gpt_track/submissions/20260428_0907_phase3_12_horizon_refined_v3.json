@@ -1,0 +1,47 @@
+{
+  "label": "phase3_12_horizon_refined_v3",
+  "blend_id": "greedy_cap25_both",
+  "alpha": null,
+  "side": "both",
+  "components_hepatic": [
+    "NIT_plus_scores__hepatic__h3p5__lgbm_binary__soft_weight",
+    "NIT_plus_scores__hepatic__h2p5__lgbm_binary"
+  ],
+  "components_death": [
+    "current_state_v2__death__h6__catboost_binary",
+    "biomarker_only__death__h6__catboost_binary"
+  ],
+  "weights_hepatic": {
+    "_v3": 0.8658008658008657,
+    "NIT_plus_scores__hepatic__h3p5__lgbm_binary__soft_weight": 0.08658008658008658,
+    "NIT_plus_scores__hepatic__h2p5__lgbm_binary": 0.047619047619047616
+  },
+  "weights_death": {
+    "_v3": 0.8281573498964804,
+    "current_state_v2__death__h6__catboost_binary": 0.12422360248447203,
+    "biomarker_only__death__h6__catboost_binary": 0.047619047619047616
+  },
+  "hepatic_oof": 0.852726250702642,
+  "death_oof": 0.9551176096630642,
+  "weighted_oof": 0.8834436583907687,
+  "hepatic_fold_std": 0.11182785281382636,
+  "hepatic_fold_min": 0.5922480620155038,
+  "death_fold_std": 0.012624489729460746,
+  "death_fold_min": 0.9236641221374046,
+  "rho_test_anchor": {
+    "hepatic": 0.9931324244134117,
+    "death": 0.9977739768379436
+  },
+  "rho_oof_anchor": {
+    "hepatic": 0.9934593482472046,
+    "death": 0.9963105468855915
+  },
+  "delta_vs_anchor": {
+    "weighted_oof": 0.002317540278060193,
+    "hepatic_oof": 0.002711371226399528,
+    "death_oof": 0.0013986013986014845
+  },
+  "uses_target_derived_features": false,
+  "rationale": "Refined horizon ensemble + anchor blend; meets +0.002 weighted or +0.003 hep threshold.",
+  "submission_csv": "gpt/submissions/20260428_0907_phase3_12_horizon_refined_v3.csv"
+}

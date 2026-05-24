@@ -1,0 +1,70 @@
+{
+  "hep_strategy": "LS gate at LS_last>=12 kPa (Baveno VII rule-in for cACLD; Claude/GPT) + top-5%-disagreement override \u2192 merge_50_50 hep",
+  "dea_strategy": "0.85 * rank(CWGBSA dea) + 0.15 * rank(GBSA dea)",
+  "ls_threshold_kPa": 12,
+  "disag_quantile": 0.95,
+  "disag_n_overridden_train": 63,
+  "disag_n_overridden_test": 21,
+  "dea_blend_weight_cwgbs": 0.85,
+  "dea_blend_weight_gbsa": 0.15,
+  "priority": 3,
+  "qualitative_risk": "low",
+  "rationale": "Preserves the clinically anchored 12 kPa Baveno VII rule-in cutoff for the LS gate, while still capturing the disagreement-override and dea-blend gains. \u0394w_oof +0.0023. Most defensible choice in a methodology write-up: LS=12 has guideline support; LS=18 is OOF-confirmed only.",
+  "candidate_name": "finalprobe_3_lsthr12_disagq95_cw85gbsa15",
+  "submission_csv": "final_probe_sprint/submissions/finalprobe_3_lsthr12_disagq95_cw85gbsa15.csv",
+  "source_components": {
+    "hep_anchor_gpt": "gpt_track_handoff/best_submissions/20260428_0059_phase3_10_horizon_blend_v2.csv",
+    "hep_anchor_claude": "claude_track_handoff/best_submissions/phase2_blend_2way_optimal.csv",
+    "hep_merge50_50": "merge_sprint/submissions/merge_A_best_50_50_both.csv",
+    "dea_cwgbs_oof": "model_zoo_sprint/predictions/oof__survtree__dea__longitudinal_summary__cwgbs_300_lr05.csv",
+    "dea_cwgbs_test": "model_zoo_sprint/predictions/test__survtree__dea__longitudinal_summary__cwgbs_300_lr05.csv",
+    "dea_gbsa_oof": "model_zoo_sprint/predictions/oof__survtree__dea__longitudinal_summary__gbsa_200_lr05_d3.csv",
+    "dea_gbsa_test": "model_zoo_sprint/predictions/test__survtree__dea__longitudinal_summary__gbsa_200_lr05_d3.csv",
+    "ls_variable": "fibs_stiffness_med_BM_1_v* (last non-NaN)"
+  },
+  "model_families": [
+    "CWGBSA (sksurv) for dea",
+    "GBSA (sksurv) for dea",
+    "rank-mix gates for hep"
+  ],
+  "feature_sets": [
+    "Claude longitudinal_summary (143 cols, dea models)",
+    "GPT and Claude anchor test predictions (hep)"
+  ],
+  "hyperparameters": {
+    "cwgbs": {
+      "loss": "coxph",
+      "n_estimators": 300,
+      "learning_rate": 0.05,
+      "subsample": 0.8
+    },
+    "gbsa": {
+      "loss": "coxph",
+      "n_estimators": 200,
+      "learning_rate": 0.05,
+      "max_depth": 3,
+      "subsample": 0.8,
+      "max_features": "sqrt"
+    }
+  },
+  "seeds": {
+    "cwgbs": "42 + repeat (10 repeats, mean-of-ranks)",
+    "gbsa": "42 + repeat (10 repeats, mean-of-ranks)"
+  },
+  "oof_hepatic_C": 0.842938861885395,
+  "oof_death_C": 0.9727272727272728,
+  "weighted_oof_C": 0.8818753851379584,
+  "delta_w_vs_current_best": 0.002292290467976743,
+  "rho_hep_vs_current_best": 0.991101671452102,
+  "rho_death_vs_current_best": 0.9953084711166131,
+  "rho_hep_vs_merge_50_50": 0.98005131056139,
+  "rho_death_vs_merge_50_50": 0.9299890022256019,
+  "mean_rank_shift_hep_vs_current_best": 0.010976420814960126,
+  "max_rank_shift_hep_vs_current_best": 0.22458628841607564,
+  "mean_rank_shift_dea_vs_current_best": 0.021310128598494373,
+  "max_rank_shift_dea_vs_current_best": 0.08274231678486997,
+  "target_derived_features_used": false,
+  "strict_time_aligned_used": false,
+  "public_LB_tuned_weights": false,
+  "reproducibility_status": "Fully reproducible from raw via final_probe_sprint/scripts/build_final_3.py + Claude track + zoo CWGBSA/GBSA OOF cache"
+}

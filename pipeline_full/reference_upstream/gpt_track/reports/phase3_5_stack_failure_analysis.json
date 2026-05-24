@@ -1,0 +1,40 @@
+{
+  "rank_corr_test": {
+    "hepatic": 0.6243695694997528,
+    "death": 0.6131848747116793
+  },
+  "n_components": {
+    "hepatic": 97,
+    "death": 98
+  },
+  "dth_in_components": {
+    "hepatic": false,
+    "death": true
+  },
+  "fold_stats": {
+    "hepatic": {
+      "ridge": {
+        "oof_cindex": 0.8943226531759415,
+        "fold_mean": 0.9110514068676862,
+        "fold_std": 0.040338311235384894
+      },
+      "elastic_net": {
+        "oof_cindex": 0.8589756307244651,
+        "fold_mean": 0.882380963968149,
+        "fold_std": 0.04860085536189287
+      }
+    },
+    "death": {
+      "ridge": {
+        "oof_cindex": 0.8354736172917991,
+        "fold_mean": 0.83488895979258,
+        "fold_std": 0.04713304249849756
+      },
+      "elastic_net": {
+        "oof_cindex": 0.8089849544394999,
+        "fold_mean": 0.805707170926908,
+        "fold_std": 0.06165682005048983
+      }
+    }
+  }
+}

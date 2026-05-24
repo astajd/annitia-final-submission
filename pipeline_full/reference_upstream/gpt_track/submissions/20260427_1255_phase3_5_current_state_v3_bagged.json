@@ -1,0 +1,58 @@
+{
+  "label": "phase3_5_current_state_v3_bagged",
+  "description": "Seed-bagged ensemble of RSF + xgb_cox + xgb_aft on current_state_v2 only.",
+  "leakage_tag": "moderate-high",
+  "submission_csv": "gpt/submissions/20260427_1255_phase3_5_current_state_v3_bagged.csv",
+  "uses_target_derived_features": false,
+  "hepatic": {
+    "method": "seed_bagged",
+    "components": [
+      "phase3_current_state_v2::hepatic__rsf__s0",
+      "phase3_current_state_v2::hepatic__xgb_cox__s0",
+      "phase3_current_state_v2::hepatic__xgb_aft__s0",
+      "phase3_current_state_v2::hepatic__rsf__s1"
+    ],
+    "weights": {
+      "phase3_current_state_v2::hepatic__rsf__s0": 0.3235294117647058,
+      "phase3_current_state_v2::hepatic__xgb_cox__s0": 0.029411764705882353,
+      "phase3_current_state_v2::hepatic__xgb_aft__s0": 0.2352941176470588,
+      "phase3_current_state_v2::hepatic__rsf__s1": 0.4117647058823529
+    },
+    "oof_cindex": 0.8378467744602056
+  },
+  "death": {
+    "method": "seed_bagged",
+    "components": [
+      "phase3_current_state_v2::death__rsf__s0",
+      "phase3_current_state_v2::death__xgb_cox__s0",
+      "phase3_current_state_v2::death__xgb_aft__s0",
+      "phase3_current_state_v2::death__rsf__s1",
+      "phase3_current_state_v2::death__xgb_cox__s1",
+      "phase3_current_state_v2::death__xgb_aft__s1"
+    ],
+    "weights": {
+      "phase3_current_state_v2::death__rsf__s0": 0.28125000000000006,
+      "phase3_current_state_v2::death__xgb_cox__s0": 0.21875,
+      "phase3_current_state_v2::death__xgb_aft__s0": 0.12499999999999999,
+      "phase3_current_state_v2::death__rsf__s1": 0.14062499999999997,
+      "phase3_current_state_v2::death__xgb_cox__s1": 0.203125,
+      "phase3_current_state_v2::death__xgb_aft__s1": 0.03125
+    },
+    "oof_cindex": 0.9500741682559865
+  },
+  "weighted_score_cv": 0.8715149925989398,
+  "rank_corr_with_current_state_v2": {
+    "oof_hepatic": 0.9974911284173936,
+    "oof_death": 0.9989876216229558,
+    "test_hepatic": 0.9981502875346223,
+    "test_death": 0.9990264715624942
+  },
+  "all_methods_oof_hepatic": {
+    "equal": 0.815345699831366,
+    "seed_bagged": 0.8378467744602056
+  },
+  "all_methods_oof_death": {
+    "equal": 0.9487391396482305,
+    "seed_bagged": 0.9500741682559865
+  }
+}

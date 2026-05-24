@@ -1,0 +1,19 @@
+{
+  "study_name": "NIT_plus_scores_longitudinal__hepatic__lgbm_binary",
+  "best_value": 0.7197543316127251,
+  "best_params": {
+    "n_estimators": 300,
+    "learning_rate": 0.020348021752837807,
+    "num_leaves": 57,
+    "max_depth": 0,
+    "min_child_samples": 34,
+    "subsample": 0.6809755634893229,
+    "colsample_bytree": 0.6551673873710904,
+    "reg_lambda": 0.003113219502730163
+  },
+  "best_user_attrs": {
+    "cindex_mean": 0.7768249191277222,
+    "cindex_std": 0.11414117502999438
+  },
+  "n_trials": 25
+}

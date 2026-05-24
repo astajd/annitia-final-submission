@@ -1,0 +1,37 @@
+{
+  "label": "phase3_13_cv90_full10",
+  "anchor": "phase3_10_horizon_blend_v2",
+  "anchor_test_csv": "gpt/submissions/20260428_0059_phase3_10_horizon_blend_v2.csv",
+  "blend_recipe": "0.90 anchor + 0.10 full_retrain",
+  "components_hepatic": [
+    "_v3",
+    "NIT_plus_scores__hepatic__h1__lgbm_binary",
+    "v3_hepatic_schema__hepatic__h3__lgbm_binary__s4"
+  ],
+  "components_death": [
+    "_v3",
+    "current_state_v2__death__h5__catboost_binary__s3",
+    "NIT_plus_scores__death__h4__catboost_binary"
+  ],
+  "weights_hepatic": {
+    "_v3": 0.7905138339920948,
+    "NIT_plus_scores__hepatic__h1__lgbm_binary": 0.11857707509881421,
+    "v3_hepatic_schema__hepatic__h3__lgbm_binary__s4": 0.09090909090909091
+  },
+  "weights_death": {
+    "_v3": 0.7905138339920948,
+    "current_state_v2__death__h5__catboost_binary__s3": 0.11857707509881421,
+    "NIT_plus_scores__death__h4__catboost_binary": 0.09090909090909091
+  },
+  "rho_hepatic_test_anchor": 0.9997686773243643,
+  "rho_death_test_anchor": 0.9999659913020681,
+  "rho_weighted_test_anchor": 0.9998278715176754,
+  "h_rank_shift_mean_abs": 0.00458282335451492,
+  "h_rank_shift_p95": 0.011820330969267157,
+  "h_rank_shift_max_abs": 0.024822695035460973,
+  "d_rank_shift_mean_abs": 0.001458679140888285,
+  "d_rank_shift_p95": 0.004728132387706863,
+  "d_rank_shift_max_abs": 0.011820330969267157,
+  "uses_target_derived_features": false,
+  "submission_csv": "gpt/submissions/20260428_0921_phase3_13_cv90_full10.csv"
+}

@@ -1,0 +1,45 @@
+{
+  "submission_kind": "phase3 cross-feature stacked blend",
+  "augmented_components": {
+    "landmark_3y_RSF": true,
+    "xgb_cox_longitudinal_summary_in_permissive": false,
+    "death_model": false
+  },
+  "blend_weights": {
+    "landmark": 0.3,
+    "permissive": 0.7
+  },
+  "permissive_members": [
+    {
+      "id": "rsf_longitudinal_summary",
+      "augmented": false,
+      "model": "rsf",
+      "feature_set": "longitudinal_summary"
+    },
+    {
+      "id": "xgb_cox_longitudinal_plus_meta",
+      "augmented": false,
+      "model": "xgb_cox",
+      "feature_set": "longitudinal_plus_meta"
+    },
+    {
+      "id": "xgb_cox_longitudinal_summary",
+      "augmented": false,
+      "model": "xgb_cox",
+      "feature_set": "longitudinal_summary"
+    }
+  ],
+  "cv_diagnostic": {
+    "lm_base_ms": 0.671162327742536,
+    "lm_aug_ms": 0.6805769858285542,
+    "lm_delta": 0.009414658086018157,
+    "xgb_h_base_ms": 0.6949486606379065,
+    "xgb_h_aug_ms": 0.6976175214531601,
+    "xgb_h_delta": 0.0026688608152536375,
+    "death_base_ms": 0.9312929894634978,
+    "death_aug_ms": 0.9303511737990133,
+    "death_delta": -0.00094181566448448
+  },
+  "improvement_threshold": 0.005,
+  "vs_phase2_blend_2way_optimal_LB_0.8965": "augmented version of the same components; compare against 0.8965 anchor"
+}

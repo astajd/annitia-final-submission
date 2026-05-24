@@ -1,0 +1,87 @@
+{
+  "submission_kind": "3-way blend (Tier-2 + Tier-4 + diverse Tier-1)",
+  "hypothesis": "Adding a Tier-1 model with OOF rank-corr < 0.6 vs both the 2-way blend's anchors should add information that the 2-way blend cannot capture. Pre-registered: if LB beats 0.88033, diversity has another tier; if LB \u2248 0.88, the 3rd model is redundant on test.",
+  "hepatic": {
+    "ensemble_strategy": "1/3 rank-average across (a), (b), (c)",
+    "components": {
+      "a_landmark_3y": {
+        "feature_set": "landmark_3y",
+        "model": "rsf",
+        "params": {
+          "n_estimators": 279,
+          "min_samples_leaf": 12,
+          "min_samples_split": 71,
+          "max_features": "log2"
+        },
+        "n_train": 1238,
+        "n_train_events": 32,
+        "n_features": 49
+      },
+      "b_permissive_ensemble": {
+        "members": [
+          {
+            "id": "rsf_longitudinal_summary",
+            "model": "rsf",
+            "feature_set": "longitudinal_summary"
+          },
+          {
+            "id": "xgb_cox_longitudinal_plus_meta",
+            "model": "xgb_cox",
+            "feature_set": "longitudinal_plus_meta"
+          },
+          {
+            "id": "xgb_cox_longitudinal_summary",
+            "model": "xgb_cox",
+            "feature_set": "longitudinal_summary"
+          }
+        ],
+        "n_train": 1253,
+        "n_train_events": 47
+      },
+      "c_diverse_third": {
+        "id": "xgb_cox_baseline_v1",
+        "feature_set": "baseline_v1",
+        "model": "xgb_cox",
+        "params": {
+          "n_estimators": 320,
+          "learning_rate": 0.011627388738686578,
+          "max_depth": 8,
+          "min_child_weight": 1.8809463655465164,
+          "subsample": 0.7457174290570576,
+          "colsample_bytree": 0.6941935551421055,
+          "reg_lambda": 0.3040863647001995
+        },
+        "n_train": 1253,
+        "n_train_events": 47,
+        "n_features": 23,
+        "oof_corr_vs_landmark": 0.4922458302485922,
+        "oof_corr_vs_permissive": 0.43343713456949556,
+        "selection_rule": "OOF rank-corr < 0.6 vs BOTH landmark_3y AND permissive_ensemble"
+      }
+    },
+    "test_pairwise_rank_correlations": {
+      "landmark_vs_permissive": 0.4782573487429764,
+      "landmark_vs_third": 0.4407216690988031,
+      "permissive_vs_third": 0.4158138145198851
+    }
+  },
+  "death": {
+    "feature_set": "longitudinal_summary",
+    "model": "xgb_cox",
+    "params": {
+      "n_estimators": 300,
+      "learning_rate": 0.05
+    },
+    "death_mode": "censor_missing_death_at_last",
+    "n_features": 143,
+    "cv_train_side_cindex": "0.948 \u00b1 0.018"
+  },
+  "reference_LBs": {
+    "phase2_blend_landmark_permissive": 0.88033,
+    "phase2_landmark_3y": 0.8109,
+    "phase2_landmark_multi": 0.81,
+    "phase1_ensemble": 0.7986,
+    "phase2_honest_ensemble": 0.7509
+  },
+  "predicted_LB_band": "0.88\u20130.91 (max pair corr 0.478 \u2014 strong 3-way diversity)"
+}

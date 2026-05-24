@@ -1,0 +1,80 @@
+{
+  "label": "phase2_clean_clinical_NIT",
+  "description": "NIT + clinical scores + baselines + landmark windows. Strongest qualitative defensibility.",
+  "leakage_tag": "low/moderate",
+  "submission_csv": "gpt/submissions/20260426_1832_phase2_clean_clinical_NIT.csv",
+  "feature_sets": [
+    "NIT_longitudinal_only",
+    "NIT_plus_scores_longitudinal",
+    "baseline_plus_landmark_trends",
+    "baseline_v1",
+    "clinical_scores_dynamic",
+    "early_v1_v3",
+    "first_1y",
+    "first_2y",
+    "first_3_visits",
+    "first_3y"
+  ],
+  "experiments": [
+    "001_baseline_v1_drop_missing_death",
+    "002_baseline_v1_censor_missing_death",
+    "003_early_v1_v3",
+    "phase2_NIT_longitudinal_only",
+    "phase2_NIT_plus_scores_longitudinal",
+    "phase2_baseline_plus_landmark_trends",
+    "phase2_clinical_scores_dynamic",
+    "phase2_first_1y",
+    "phase2_first_2y",
+    "phase2_first_3_visits",
+    "phase2_first_3y"
+  ],
+  "hepatic": {
+    "method": "greedy",
+    "components": [
+      "001_baseline_v1_drop_missing_death::hepatic__rsf",
+      "003_early_v1_v3::hepatic__catboost_binary",
+      "phase2_NIT_plus_scores_longitudinal::hepatic__xgb_cox"
+    ],
+    "weights": {
+      "001_baseline_v1_drop_missing_death::hepatic__rsf": 1.0,
+      "003_early_v1_v3::hepatic__catboost_binary": 1.0,
+      "phase2_NIT_plus_scores_longitudinal::hepatic__xgb_cox": 1.0
+    },
+    "oof_cindex": 0.8341269053995966
+  },
+  "death": {
+    "method": "greedy",
+    "components": [
+      "phase2_NIT_plus_scores_longitudinal::death__xgb_cox",
+      "phase2_first_3y::death__rsf",
+      "phase2_clinical_scores_dynamic::death__xgb_cox",
+      "phase2_NIT_longitudinal_only::death__xgb_cox",
+      "phase2_first_1y::death__rsf"
+    ],
+    "weights": {
+      "phase2_NIT_plus_scores_longitudinal::death__xgb_cox": 1.0,
+      "phase2_first_3y::death__rsf": 1.0,
+      "phase2_clinical_scores_dynamic::death__xgb_cox": 1.0,
+      "phase2_NIT_longitudinal_only::death__xgb_cox": 1.0,
+      "phase2_first_1y::death__rsf": 1.0
+    },
+    "oof_cindex": 0.9066327611782157
+  },
+  "weighted_score_cv": 0.8558786621331822,
+  "all_methods_oof": {
+    "hepatic": {
+      "equal": 0.7885130443408392,
+      "cv_weighted": 0.7994577257547201,
+      "greedy": 0.8341269053995966,
+      "capped": 0.8040207651357338,
+      "seed_bagged": 0.8219753331349403
+    },
+    "death": {
+      "equal": 0.8266581902945539,
+      "cv_weighted": 0.8788302606484425,
+      "greedy": 0.9066327611782157,
+      "capped": 0.8650985378258106,
+      "seed_bagged": 0.9057003602458148
+    }
+  }
+}

@@ -1,0 +1,26 @@
+# Runtime outputs from the smoke test
+pipeline_full/runnable/_outputs/
+pipeline_full/runnable/generated_slot1_prediction.csv
+
+# Local virtual environments
+pipeline_full/runnable/.venv/
+.venv/
+venv/
+
+# Raw challenge data — not redistributed; placed locally by reviewer
+data/raw/
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+*.egg-info/
+
+# Local environment files
+.env
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

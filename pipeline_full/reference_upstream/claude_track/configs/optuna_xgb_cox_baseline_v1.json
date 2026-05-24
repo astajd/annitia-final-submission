@@ -1,0 +1,24 @@
+{
+  "id": "xgb_cox_baseline_v1",
+  "model": "xgb_cox",
+  "feature_set": "baseline_v1",
+  "sampler": "TPE",
+  "inner_cv": "5-fold \u00d7 5-repeat",
+  "selection_metric": "mean \u2212 1\u00d7std of C-index",
+  "n_trials_complete": 50,
+  "n_trials_failed": 0,
+  "best_trial_number": 46,
+  "best_params": {
+    "n_estimators": 320,
+    "learning_rate": 0.011627388738686578,
+    "max_depth": 8,
+    "min_child_weight": 1.8809463655465164,
+    "subsample": 0.7457174290570576,
+    "colsample_bytree": 0.6941935551421055,
+    "reg_lambda": 0.3040863647001995
+  },
+  "best_mean": 0.7833756151536575,
+  "best_std": 0.08872031582642856,
+  "best_mean_minus_std": 0.6946552993272289,
+  "tuning_seconds": 1442.4
+}

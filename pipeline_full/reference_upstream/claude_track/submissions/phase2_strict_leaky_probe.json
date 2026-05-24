@@ -1,0 +1,482 @@
+{
+  "submission_kind": "AUDIT PROBE \u2014 NOT A SHIP CANDIDATE",
+  "purpose": "Test whether the test set has the same per-row outcome-dependent visit-cutoff structure as train. Phase 1 audit proved strict_time_aligned is leaky on train (Age_delta alone gives C \u2248 0.958 hepatic). If LB \u2248 CV (~0.94), the leaderboard top score is exploitable through this trick; if LB collapses, the asymmetry doesn't transfer and the leader has a different trick.",
+  "hepatic_model": {
+    "feature_set": "strict_time_aligned (LEAKY by Phase 1 audit)",
+    "model": "coxnet",
+    "params": {
+      "l1_ratio": 0.5,
+      "alpha_min_ratio": 0.01
+    },
+    "n_features": 140,
+    "n_train_rows": 1253,
+    "n_train_events": 47,
+    "train_cutoff_definition": "cutoff_age = age_v1 + time, where time = (event_age - age_v1) for events, (max_age - age_v1) for censored",
+    "test_cutoff_definition": "cutoff_age = age_v1 + (max_age - age_v1) = max_age (equivalent to using all available visits, since no outcome labels are visible at test time)",
+    "asymmetry_note": "Train events get short windows; train censored and all test rows get full windows. This asymmetry IS the leakage being probed.",
+    "cv_train_side_cindex": "0.938 \u00b1 0.052 (5-fold \u00d7 10-repeat, drop_missing_death) \u2014 see reports/phase2_cv_results.csv. Note: XGB-Cox on the same feature set gives 0.980 \u00b1 0.014; Coxnet selected here for monotone-linear interpretability of the leakage signal."
+  },
+  "death_model": {
+    "feature_set": "longitudinal_summary",
+    "model": "xgb_cox",
+    "params": {
+      "n_estimators": 300,
+      "learning_rate": 0.05
+    },
+    "death_mode": "censor_missing_death_at_last",
+    "n_features": 143,
+    "n_train_rows": 1253,
+    "n_train_events": 76,
+    "cv_train_side_cindex": "0.948 \u00b1 0.018 (5-fold \u00d7 10-repeat) \u2014 see reports/phase2_cv_results.csv"
+  },
+  "ensemble": "single model per endpoint (no rank-averaging)",
+  "interpretation_of_LB_result": {
+    "hep_LB_~0.94": "test was generated with the same train-side truncation; leader is exploiting this. Does not change our ship strategy (we do not ship leaky models), but answers the question.",
+    "hep_LB_~0.5_to_0.6": "asymmetry doesn't transfer; leader has a different trick. Investigate longitudinal_plus_meta or fixed_reference_time.",
+    "hep_LB_~0.7_to_0.85": "partial transfer; test set has some outcome-dependent truncation but not full. Ambiguous but suggests leader's trick is more elaborate than naive strict-features."
+  },
+  "feature_distribution_comparison": {
+    "Age_delta": {
+      "train_event": {
+        "n_nonnull": 47,
+        "median": 3.0,
+        "p5": 0.0,
+        "p95": 15.399999999999991,
+        "min": 0.0,
+        "max": 20.0
+      },
+      "train_censored": {
+        "n_nonnull": 1206,
+        "median": 4.0,
+        "p5": 0.0,
+        "p95": 15.0,
+        "min": 0.0,
+        "max": 21.0
+      },
+      "test": {
+        "n_nonnull": 423,
+        "median": 5.0,
+        "p5": 1.0,
+        "p95": 17.0,
+        "min": 0.0,
+        "max": 21.0
+      }
+    },
+    "Age_count": {
+      "train_event": {
+        "n_nonnull": 47,
+        "median": 3.0,
+        "p5": 1.0,
+        "p95": 10.699999999999996,
+        "min": 1.0,
+        "max": 14.0
+      },
+      "train_censored": {
+        "n_nonnull": 1206,
+        "median": 4.0,
+        "p5": 1.0,
+        "p95": 12.0,
+        "min": 1.0,
+        "max": 19.0
+      },
+      "test": {
+        "n_nonnull": 423,
+        "median": 4.0,
+        "p5": 2.0,
+        "p95": 13.899999999999977,
+        "min": 1.0,
+        "max": 22.0
+      }
+    },
+    "Age_rel_delta": {
+      "train_event": {
+        "n_nonnull": 47,
+        "median": 0.043478260869565216,
+        "p5": 0.0,
+        "p95": 0.28841897233201574,
+        "min": 0.0,
+        "max": 0.43478260869565216
+      },
+      "train_censored": {
+        "n_nonnull": 1206,
+        "median": 0.07142857142857142,
+        "p5": 0.0,
+        "p95": 0.3090659340659341,
+        "min": 0.0,
+        "max": 0.72
+      },
+      "test": {
+        "n_nonnull": 423,
+        "median": 0.09090909090909091,
+        "p5": 0.01788961038961039,
+        "p95": 0.3528322440087146,
+        "min": 0.0,
+        "max": 0.6785714285714286
+      }
+    },
+    "Age_std": {
+      "train_event": {
+        "n_nonnull": 47,
+        "median": 1.118033988749895,
+        "p5": 0.0,
+        "p95": 4.817466523562241,
+        "min": 0.0,
+        "max": 6.599319692829199
+      },
+      "train_censored": {
+        "n_nonnull": 1206,
+        "median": 1.5,
+        "p5": 0.0,
+        "p95": 4.706880206573038,
+        "min": 0.0,
+        "max": 7.391887445030531
+      },
+      "test": {
+        "n_nonnull": 423,
+        "median": 1.8708286933869707,
+        "p5": 0.5,
+        "p95": 5.347717652710448,
+        "min": 0.0,
+        "max": 7.3181661333667165
+      }
+    },
+    "Age_last": {
+      "train_event": {
+        "n_nonnull": 47,
+        "median": 64.0,
+        "p5": 42.3,
+        "p95": 75.0,
+        "min": 38.0,
+        "max": 77.0
+      },
+      "train_censored": {
+        "n_nonnull": 1206,
+        "median": 61.0,
+        "p5": 35.0,
+        "p95": 78.0,
+        "min": 19.0,
+        "max": 89.0
+      },
+      "test": {
+        "n_nonnull": 423,
+        "median": 63.0,
+        "p5": 39.0,
+        "p95": 78.89999999999998,
+        "min": 24.0,
+        "max": 88.0
+      }
+    },
+    "BMI_count": {
+      "train_event": {
+        "n_nonnull": 47,
+        "median": 2.0,
+        "p5": 0.0,
+        "p95": 8.0,
+        "min": 0.0,
+        "max": 11.0
+      },
+      "train_censored": {
+        "n_nonnull": 1206,
+        "median": 3.0,
+        "p5": 0.0,
+        "p95": 11.0,
+        "min": 0.0,
+        "max": 19.0
+      },
+      "test": {
+        "n_nonnull": 423,
+        "median": 3.0,
+        "p5": 0.0,
+        "p95": 13.0,
+        "min": 0.0,
+        "max": 22.0
+      }
+    },
+    "alt_count": {
+      "train_event": {
+        "n_nonnull": 47,
+        "median": 3.0,
+        "p5": 1.0,
+        "p95": 10.0,
+        "min": 0.0,
+        "max": 12.0
+      },
+      "train_censored": {
+        "n_nonnull": 1206,
+        "median": 3.0,
+        "p5": 0.0,
+        "p95": 11.75,
+        "min": 0.0,
+        "max": 19.0
+      },
+      "test": {
+        "n_nonnull": 423,
+        "median": 4.0,
+        "p5": 1.0,
+        "p95": 13.0,
+        "min": 0.0,
+        "max": 21.0
+      }
+    },
+    "ast_count": {
+      "train_event": {
+        "n_nonnull": 47,
+        "median": 2.0,
+        "p5": 0.0,
+        "p95": 8.699999999999996,
+        "min": 0.0,
+        "max": 10.0
+      },
+      "train_censored": {
+        "n_nonnull": 1206,
+        "median": 3.0,
+        "p5": 0.0,
+        "p95": 10.0,
+        "min": 0.0,
+        "max": 17.0
+      },
+      "test": {
+        "n_nonnull": 423,
+        "median": 4.0,
+        "p5": 1.0,
+        "p95": 11.899999999999977,
+        "min": 0.0,
+        "max": 21.0
+      }
+    },
+    "ggt_count": {
+      "train_event": {
+        "n_nonnull": 47,
+        "median": 3.0,
+        "p5": 1.0,
+        "p95": 10.0,
+        "min": 0.0,
+        "max": 12.0
+      },
+      "train_censored": {
+        "n_nonnull": 1206,
+        "median": 3.0,
+        "p5": 0.0,
+        "p95": 11.0,
+        "min": 0.0,
+        "max": 18.0
+      },
+      "test": {
+        "n_nonnull": 423,
+        "median": 4.0,
+        "p5": 1.0,
+        "p95": 13.0,
+        "min": 0.0,
+        "max": 21.0
+      }
+    },
+    "bilirubin_count": {
+      "train_event": {
+        "n_nonnull": 47,
+        "median": 3.0,
+        "p5": 0.30000000000000027,
+        "p95": 10.0,
+        "min": 0.0,
+        "max": 12.0
+      },
+      "train_censored": {
+        "n_nonnull": 1206,
+        "median": 3.0,
+        "p5": 0.0,
+        "p95": 11.0,
+        "min": 0.0,
+        "max": 18.0
+      },
+      "test": {
+        "n_nonnull": 423,
+        "median": 4.0,
+        "p5": 0.0,
+        "p95": 13.0,
+        "min": 0.0,
+        "max": 21.0
+      }
+    },
+    "plt_count": {
+      "train_event": {
+        "n_nonnull": 47,
+        "median": 0.0,
+        "p5": 0.0,
+        "p95": 5.0,
+        "min": 0.0,
+        "max": 8.0
+      },
+      "train_censored": {
+        "n_nonnull": 1206,
+        "median": 1.0,
+        "p5": 0.0,
+        "p95": 6.0,
+        "min": 0.0,
+        "max": 13.0
+      },
+      "test": {
+        "n_nonnull": 423,
+        "median": 2.0,
+        "p5": 0.0,
+        "p95": 7.0,
+        "min": 0.0,
+        "max": 19.0
+      }
+    },
+    "gluc_fast_count": {
+      "train_event": {
+        "n_nonnull": 47,
+        "median": 2.0,
+        "p5": 0.0,
+        "p95": 8.699999999999996,
+        "min": 0.0,
+        "max": 10.0
+      },
+      "train_censored": {
+        "n_nonnull": 1206,
+        "median": 3.0,
+        "p5": 0.0,
+        "p95": 10.0,
+        "min": 0.0,
+        "max": 17.0
+      },
+      "test": {
+        "n_nonnull": 423,
+        "median": 3.0,
+        "p5": 1.0,
+        "p95": 11.0,
+        "min": 0.0,
+        "max": 19.0
+      }
+    },
+    "triglyc_count": {
+      "train_event": {
+        "n_nonnull": 47,
+        "median": 2.0,
+        "p5": 0.0,
+        "p95": 8.0,
+        "min": 0.0,
+        "max": 10.0
+      },
+      "train_censored": {
+        "n_nonnull": 1206,
+        "median": 3.0,
+        "p5": 0.0,
+        "p95": 10.0,
+        "min": 0.0,
+        "max": 17.0
+      },
+      "test": {
+        "n_nonnull": 423,
+        "median": 3.0,
+        "p5": 1.0,
+        "p95": 11.0,
+        "min": 0.0,
+        "max": 19.0
+      }
+    },
+    "chol_count": {
+      "train_event": {
+        "n_nonnull": 47,
+        "median": 2.0,
+        "p5": 0.0,
+        "p95": 7.699999999999996,
+        "min": 0.0,
+        "max": 9.0
+      },
+      "train_censored": {
+        "n_nonnull": 1206,
+        "median": 3.0,
+        "p5": 0.0,
+        "p95": 9.0,
+        "min": 0.0,
+        "max": 16.0
+      },
+      "test": {
+        "n_nonnull": 423,
+        "median": 3.0,
+        "p5": 0.0,
+        "p95": 11.0,
+        "min": 0.0,
+        "max": 17.0
+      }
+    },
+    "fibs_stiffness_med_BM_1_count": {
+      "train_event": {
+        "n_nonnull": 47,
+        "median": 2.0,
+        "p5": 0.0,
+        "p95": 6.0,
+        "min": 0.0,
+        "max": 9.0
+      },
+      "train_censored": {
+        "n_nonnull": 1206,
+        "median": 3.0,
+        "p5": 1.0,
+        "p95": 7.0,
+        "min": 0.0,
+        "max": 13.0
+      },
+      "test": {
+        "n_nonnull": 423,
+        "median": 3.0,
+        "p5": 1.0,
+        "p95": 8.0,
+        "min": 0.0,
+        "max": 15.0
+      }
+    },
+    "fibrotest_BM_2_count": {
+      "train_event": {
+        "n_nonnull": 47,
+        "median": 3.0,
+        "p5": 0.30000000000000027,
+        "p95": 10.0,
+        "min": 0.0,
+        "max": 12.0
+      },
+      "train_censored": {
+        "n_nonnull": 1206,
+        "median": 3.0,
+        "p5": 0.0,
+        "p95": 11.0,
+        "min": 0.0,
+        "max": 18.0
+      },
+      "test": {
+        "n_nonnull": 423,
+        "median": 4.0,
+        "p5": 0.0,
+        "p95": 13.0,
+        "min": 0.0,
+        "max": 21.0
+      }
+    },
+    "aixp_aix_result_BM_3_count": {
+      "train_event": {
+        "n_nonnull": 47,
+        "median": 1.0,
+        "p5": 0.0,
+        "p95": 4.0,
+        "min": 0.0,
+        "max": 5.0
+      },
+      "train_censored": {
+        "n_nonnull": 1206,
+        "median": 1.0,
+        "p5": 0.0,
+        "p95": 4.0,
+        "min": 0.0,
+        "max": 9.0
+      },
+      "test": {
+        "n_nonnull": 423,
+        "median": 1.0,
+        "p5": 0.0,
+        "p95": 4.899999999999977,
+        "min": 0.0,
+        "max": 8.0
+      }
+    }
+  }
+}

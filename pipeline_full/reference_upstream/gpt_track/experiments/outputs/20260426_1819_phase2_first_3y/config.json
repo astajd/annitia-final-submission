@@ -1,0 +1,50 @@
+{
+  "name": "phase2_first_3y",
+  "seed": 20260426,
+  "feature_set": "first_3y",
+  "death_target_mode": "censor_missing_death_at_last_visit",
+  "n_splits": 5,
+  "n_repeats": 3,
+  "models": [
+    {
+      "name": "rsf",
+      "params": {
+        "n_estimators": 250,
+        "max_depth": 6,
+        "min_samples_leaf": 5
+      }
+    },
+    {
+      "name": "xgb_cox",
+      "params": {
+        "n_estimators": 350,
+        "max_depth": 4,
+        "learning_rate": 0.05
+      }
+    },
+    {
+      "name": "lgbm_binary",
+      "params": {
+        "n_estimators": 400,
+        "learning_rate": 0.05,
+        "num_leaves": 31
+      }
+    },
+    {
+      "name": "catboost_binary",
+      "params": {
+        "iterations": 500,
+        "depth": 5,
+        "learning_rate": 0.05
+      }
+    },
+    {
+      "name": "xgb_binary",
+      "params": {
+        "n_estimators": 400,
+        "max_depth": 4,
+        "learning_rate": 0.05
+      }
+    }
+  ]
+}

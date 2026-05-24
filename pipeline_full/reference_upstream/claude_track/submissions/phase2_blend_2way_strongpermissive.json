@@ -1,0 +1,33 @@
+{
+  "submission_kind": "2-way blend, strong-permissive replacement (single member, no rank-avg)",
+  "rationale": "Task 2 audit: rsf_longitudinal_summary alone has 5\u00d710 m-s 0.7356, beating the 3-member permissive_ensemble_avg's 0.7197 by +0.016 \u2014 same magnitude as the re-weighting LB win. The two XGB-cox members are nearly identical (OOF rank-corr 0.97) and individually weaker (~0.69 m-s); the 3-way average dilutes the RSF's signal. Strict criterion (test corr vs landmark < 0.5) did NOT fire (rsf_longitudinal_summary has 0.548, just above the bar) but the m-s gap is too large to ignore \u2014 building this as a relaxed-criterion candidate.",
+  "permissive_member_id": "rsf_longitudinal_summary",
+  "permissive_member_params": {
+    "n_estimators": 679,
+    "min_samples_leaf": 5,
+    "min_samples_split": 76,
+    "max_features": "sqrt"
+  },
+  "permissive_member_5x10_ms": 0.7356,
+  "permissive_ensemble_avg_5x10_ms": 0.7197,
+  "permissive_member_test_corr_vs_landmark": 0.548,
+  "weight_landmark": 0.23,
+  "weight_member": 0.77,
+  "blend_5x10_cv": {
+    "mean": 0.8295309671005316,
+    "std": 0.09194735706095315,
+    "mean_minus_std": 0.7375836100395785
+  },
+  "vs_phase2_blend_2way_optimal_LB_0.8965": {
+    "permissive_replaced_with": "rsf_longitudinal_summary",
+    "weight_change": "0.30/0.70 \u2192 0.23/0.77"
+  },
+  "death": {
+    "feature_set": "longitudinal_summary",
+    "model": "xgb_cox",
+    "params": {
+      "n_estimators": 300,
+      "learning_rate": 0.05
+    }
+  }
+}

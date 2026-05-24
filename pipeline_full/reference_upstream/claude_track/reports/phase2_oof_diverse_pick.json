@@ -1,0 +1,6 @@
+{
+  "id": "tuned_xgb_cox_baseline_v1",
+  "corr_vs_landmark": 0.4922458302485922,
+  "corr_vs_permissive": 0.43343713456949556,
+  "max_corr": 0.4922458302485922
+}
