@@ -1,9 +1,0 @@
-endpoint,model,feature_set,leakage_risk,n_folds_evaluated,cindex_mean,cindex_std,cindex_min
-hepatic,rsf,strict_time_aligned,low/moderate,15,0.9540611200482921,0.025645503056002085,0.8936855670103093
-hepatic,xgb_cox,strict_time_aligned,low/moderate,15,0.9743263377864098,0.012948005081447996,0.9481203007518797
-hepatic,lgbm_binary,strict_time_aligned,low/moderate,15,0.8973379552273546,0.057487951552288766,0.7768878718535469
-hepatic,catboost_binary,strict_time_aligned,low/moderate,15,0.8915031248379918,0.061890053429656824,0.7768878718535469
-death,rsf,strict_time_aligned,low/moderate,15,0.9518490589869361,0.01316897179045494,0.9335347432024169
-death,xgb_cox,strict_time_aligned,low/moderate,15,0.9252783343825898,0.03534241009796902,0.8481375358166189
-death,lgbm_binary,strict_time_aligned,low/moderate,15,0.7594425007692364,0.061637324355748944,0.6160458452722063
-death,catboost_binary,strict_time_aligned,low/moderate,15,0.7564390978059083,0.06288906300023546,0.6249062265566392
