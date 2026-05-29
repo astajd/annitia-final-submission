@@ -1,0 +1,27 @@
+# annitia-final-submission — FROM-RAW retraining environment.
+#
+# Exact, pinned environment in which `retrain_all_from_raw.sh` reproduces
+# frozen/slot1_prediction.csv byte-for-byte (md5 fb04658b99f89ec822e9c604d537dcae).
+# Tested on Python 3.11.4.
+#
+# This is the heavier "raw-reproducible" tier. The lighter cached-output
+# verification path (build_final_3.py / build_slot1_only.py + validators) still
+# uses requirements.txt and is unaffected by this file.
+
+numpy==2.4.4
+pandas==2.3.3
+scipy==1.17.1
+scikit-learn==1.6.1
+scikit-survival==0.27.0
+xgboost==3.2.0
+lightgbm==4.6.0
+catboost==1.2.10
+
+# Config loading (gpt-track run_experiment reads YAML configs).
+PyYAML==6.0.3
+
+# Notes:
+# - joblib / tqdm are NOT imported by the executed retraining chain (joblib comes
+#   in transitively via scikit-learn / scikit-survival).
+# - optuna is referenced only by non-executed tuning scripts; the 14-stage
+#   retraining chain does not import it, so it is intentionally omitted here.

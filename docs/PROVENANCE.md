@@ -7,14 +7,49 @@
 423 rows, columns `trustii_id, risk_hepatic_event, risk_death`. Both
 risk columns are emitted as pure ranks (`scipy.stats.rankdata`).
 
-## Two reproduction scripts in this repo
+## Raw data
 
-1. **`pipeline_full/runnable/build_slot1_only.py`** — the reviewer-facing
-   **authoritative verification script**. Slot1-only. Reads only cached
-   prediction CSVs under `pipeline_full/runnable/cached_intermediates/`.
-   No raw data, no `ANNITIA_DATA_ROOT`. The LS=12 gate is **read** from
-   the cached gate prediction CSV; it is NOT recomputed from any
-   liver-stiffness column.
+The official challenge data are included under `data/raw/`
+(`train.csv`, `test.csv`, `dictionary.csv`, `hello_world_submission.csv`),
+following organizer clarification. They are the source from which every
+slot1 component is regenerated in Path A.
+
+## Regeneration from raw (Path A)
+
+`pipeline_full/runnable/retrain_all_from_raw.sh` regenerates every slot1
+component from `data/raw/` and then runs the deterministic final assembly:
+
+- **Track B (GPT) anchor** is regenerated from raw through the full phase3
+  chain, including `build_phase3_submissions` (which writes the
+  `phase3_current_state_v2.json` sidecar that `build_phase3_5_candidates`
+  requires), `build_phase3_5_candidates`, `build_phase3_6_candidates`,
+  `run_phase3_9_horizon`, and `run_phase3_10_horizon`.
+- **Track A (Claude) anchor** is regenerated from raw via
+  `phase2_stack_2way.py` (2-way OOF-stacked anchor).
+- **Death CWGBSA / GBSA** survival models are regenerated from raw via
+  `task3_tree_survival.py`.
+- **The LS=12 gate and the 50/50 merge** are regenerated from the
+  regenerated Track A / Track B anchors and the raw liver-stiffness column,
+  using the verified upstream functions.
+- **Final assembly** uses the `build_slot1_only.py` logic (LS=12 gate +
+  q95 disagreement override → 50/50 merge fallback +
+  `0.85·rank(CWGBSA) + 0.15·rank(GBSA)` death blend) over the freshly
+  regenerated components — it does not read `cached_intermediates/`.
+
+The final generated file
+(`pipeline_full/runnable/retrain_outputs/final_retrain_prediction.csv`) is
+**md5-identical to `frozen/slot1_prediction.csv`**
+(`fb04658b99f89ec822e9c604d537dcae`), both endpoints rank-identical and
+float-exact, in the tested environment. See `docs/RETRAINING.md`.
+
+## Two verification scripts in this repo (Path B)
+
+1. **`pipeline_full/runnable/build_slot1_only.py`** — the fast cached-output
+   verification script. Slot1-only. Reads only cached prediction CSVs under
+   `pipeline_full/runnable/cached_intermediates/`. No raw data, no
+   `ANNITIA_DATA_ROOT`. The LS=12 gate is **read** from the cached gate
+   prediction CSV; it is NOT recomputed from any liver-stiffness column.
+   This is also the final-assembly logic reused by Path A.
 
 2. **`pipeline_full/runnable/build_final_3.py`** — the historical
    multi-candidate producer that the sprint used to emit three
@@ -22,8 +57,7 @@ risk columns are emitted as pure ranks (`scipy.stats.rankdata`).
    `load_labels()` unconditionally and so requires raw `train.csv` /
    `test.csv` to run end-to-end (even though the slot1 column values
    are mathematically determined by cached intermediates only). It is
-   preserved here for traceability; the authoritative reproduction
-   path is `build_slot1_only.py`.
+   preserved here for traceability.
 
 ## Slot1 recipe (deterministic, hardcoded)
 
@@ -43,14 +77,19 @@ Death endpoint:
 
 Output ordering: by `trustii_id` ascending (from the GPT anchor CSV).
 
-## What is NOT claimed
+## Scope and caveats
 
-- **Exact raw-to-submission reproduction is NOT claimed.** The hepatic
-  anchors and the death components are stochastic and library-version
-  sensitive; the upstream training environment is not bit-pinned.
-- **The slot1-vs-alternative selection was not codified.** `finalprobe_3`
-  was chosen over OOF-superior `finalv2_LS14` via public-LB candidate
-  pruning on a now-closed leaderboard.
+- **Path A reproduces the submitted file byte-for-byte under the pinned
+  environment.** `retrain_all_from_raw.sh` regenerates every component from
+  raw and produces a file md5-identical to `frozen/slot1_prediction.csv`
+  (`fb04658b99f89ec822e9c604d537dcae`) in the tested environment
+  (`requirements_retrain.txt`). The hepatic anchors and death components are
+  stochastic and library-version sensitive, so this byte-exactness holds
+  under that pinned environment rather than across arbitrary versions.
+- **The slot1-vs-alternative selection was public-leaderboard-informed.**
+  `finalprobe_3` was chosen over OOF-superior `finalv2_LS14` via public-LB
+  candidate pruning on a now-closed leaderboard. This caveat stands
+  independently of the byte-for-byte reproduction above.
 
 ## Provenance of each cached input (consumed by `build_slot1_only.py`)
 
@@ -64,6 +103,7 @@ Output ordering: by `trustii_id` ascending (from the GPT anchor CSV).
 | `model_zoo_sprint/predictions/test__survtree__dea__longitudinal_summary__gbsa_200_lr05_d3.csv` | `model_zoo_sprint/scripts/task3_tree_survival.py` (sksurv GBSA, `n_estimators=200, lr=0.05, max_depth=3, subsample=0.8, max_features="sqrt"`, per-repeat `random_state=42+r`) | seed-pinned; sksurv version sensitive |
 
 The upstream producing code is shipped read-only under
-`pipeline_full/reference_upstream/`. Raw data are required only if a
-reviewer wants to run those upstream scripts or `build_final_3.py`; the
-slot1 verification path (`build_slot1_only.py`) does not need them.
+`pipeline_full/reference_upstream/`. Raw data (`data/raw/`) are required for
+Path A (full from-raw retraining), for running those upstream scripts, and
+for `build_final_3.py`; the fast cached-output verification
+(`build_slot1_only.py`, Path B) does not need them.

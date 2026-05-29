@@ -4,9 +4,8 @@ This document states the limitations of the submitted solution and its reproduci
 
 ## Reproducibility
 
-- **Exact raw-to-submission retraining is not claimed.** The submitted file is reproduced rank-identically (and float-exactly) from saved model-level prediction outputs via a deterministic recipe, using `build_slot1_only.py`, which requires no raw data. It is not reproduced by retraining all models from the raw challenge data in a single command. See `REPRODUCIBILITY.md`.
-- **The authoritative verification path needs only cached intermediates.** `build_slot1_only.py` isolates the submitted slot1 branch and runs with no raw data and no `ANNITIA_DATA_ROOT`. The historical multi-candidate producer `build_final_3.py` additionally loads raw data and generates non-submitted alternatives; it is retained for provenance, not as the reviewer entry point.
-- **Upstream models are stochastic.** The track anchors (random survival forest and gradient-boosted Cox components for Track A; gradient-boosted survival models for Track B) and the death models are sensitive to library versions and training nondeterminism. Even with seeds pinned, reruns from raw data are not guaranteed to reproduce the cached outputs rank-identically.
+- **Byte-exact reproduction is environment-pinned.** Full from-raw retraining (`bash pipeline_full/runnable/retrain_all_from_raw.sh`) regenerates the submitted file byte-for-byte (md5 `fb04658b99f89ec822e9c604d537dcae`) in the tested environment. Because the upstream survival models are stochastic and library-version sensitive, byte-exactness is verified under the pinned environment in `requirements_retrain.txt` (Python 3.11.4 and the listed package versions) with the orchestrator's thread caps applied; reruns under materially different library versions may differ. See `REPRODUCIBILITY.md` and `RETRAINING.md`.
+- **Two verification paths exist.** Path A retrains everything from raw (~41–45 min); Path B (`build_slot1_only.py`) is a faster deterministic check from saved model-level outputs and needs no raw data or `ANNITIA_DATA_ROOT`. The historical multi-candidate producer `build_final_3.py` additionally loads raw data and generates non-submitted alternatives; it is retained for provenance, not as a reviewer entry point.
 - **The public leaderboard is closed.** A regenerated alternative file cannot be scored against the leaderboard to confirm equivalence, which is why the submitted file is treated as the frozen authoritative artifact.
 
 ## Selection and modeling
@@ -17,7 +16,7 @@ This document states the limitations of the submitted solution and its reproduci
 ## Data
 
 - **The dataset is synthetic.** Feature-effect patterns reflect the data-generating process, not validated clinical associations. Clinical insights derived from the model (see `EXPLAINABILITY.md`) are framed accordingly and should not be read as causal or clinically established.
-- **Raw challenge data are not redistributed.** Reviewers wishing to inspect or rerun the reference-upstream code or the historical multi-candidate script must place the official files locally per `data/README.md`.
+- **The challenge data are included for review under license.** The official files are present in `data/raw/` in this private review repository following organizer clarification (see `data/README.md`). If the repository is later made public, redistribution of the dataset should be reconfirmed with the data provider.
 
 ## Explainability scope
 

@@ -45,7 +45,7 @@ Both used `random_state = 42 + repeat` under the 5x10 stratified-by-event CV pro
 
 ## Final output and assembly
 
-Both endpoint risks are converted to ranks for submission, consistent with the rank-based C-index objective. The submitted file contains `trustii_id`, `risk_hepatic_event`, and `risk_death`. The deterministic assembly of the submitted file from the saved model-level outputs is reproducible without raw data via `build_slot1_only.py`; see `REPRODUCIBILITY.md`.
+Both endpoint risks are converted to ranks for submission, consistent with the rank-based C-index objective. The submitted file contains `trustii_id`, `risk_hepatic_event`, and `risk_death`. The submitted file can be reproduced two ways: full from-raw retraining of every component (`retrain_all_from_raw.sh`, byte-identical in the tested environment) and a fast deterministic verification that applies the full slot1 recipe to saved model-level outputs without raw data (`build_slot1_only.py`). See `REPRODUCIBILITY.md` and `RETRAINING.md`.
 
 ## Candidate selection
 

@@ -48,4 +48,4 @@ The dataset is synthetic, so feature-effect patterns reflect the data-generating
 
 ## Source material
 
-Per-component tables, the structural notes, the artifact inventory, the claim-matched references, and the readiness report are under `reports/explainability/`. The CWGBSA death-model audit is at `reports/explainability/audit_CWGBSA_death_model.md`.
+The per-component feature tables (`reports/explainability/tables/`), the method summary (`reports/explainability/tables/explainability_method_summary.csv`), the attribution-computation scripts (`reports/explainability/scripts/`), and the claim-matched references (`reports/explainability/REFERENCES.md`) are under `reports/explainability/`. The CWGBSA death-model audit is at `reports/explainability/audit_CWGBSA_death_model.md`.

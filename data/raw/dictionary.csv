@@ -1,0 +1,44 @@
+Dataset,Variable,Description
+Metadata,patient_id_anon,Unique synthetic patient identifier
+Metadata,gender,Biological sex (coded)
+Metadata,T2DM,Type 2 Diabetes
+Metadata,Hypertension,Hyptertension
+Metadata,Dyslipidaemia,Dyslipidemia
+Metadata,bariatric_surgery,Bariatric Surgery
+Metadata,bariatric_surgery_age,Age at Bariatric Surgery
+Metadata,Age_1,Age at baseline (years) – baseline exam
+Metadata,BMI_1,Body Mass Index at baseline exam
+Metadata,alt_1,ALAT/ TGP at baseline exam
+Metadata,ast_1,ASAT/ TGO at baseline exam
+Metadata,ggt_1,GGT at baseline exam
+Metadata,bilirubin_1,BILIRUBIN at baseline exam
+Metadata,plt_1,PLT at baseline exam
+Metadata,gluc_fast_1,Fasting glucose at baseline exam
+Metadata,triglyc_1,Triglyceride at baseline exam
+Metadata,chol_1,Cholesterol at baseline exam
+Metadata,fibs_stiffness_med_1_BM_1,Median liver stiffness_BM_1 at baseline exam
+Metadata,fibrotest_1_BM_2,Fibrosis probability score_1_BM_2 at baseline exam
+Metadata,aixp_aix_result_1_BM_3,Aixplorer liver stiffness_1_BM_3 at baseline exam
+Metadata,evenements_hepatiques_majeurs,Composite liver-related outcome
+Metadata,evenements_hepatiques_age_occur,Age at first liver-related event
+Metadata,death,All-cause death
+Metadata,death_age_occur,Age at death
+Biochemical,Subject.ID,Unique synthetic patient identifier
+Biochemical,visit,Visits
+Biochemical,Age,Age
+Biochemical,BMI,Body Mass Index
+Biochemical,alt,ALAT/ TGP
+Biochemical,ast,ASAT/ TGO
+Biochemical,ggt,GammaGT
+Biochemical,bilirubin,bilirubin
+Biochemical,plt,Plaquettes
+Biochemical,gluc_fast,Fasting glucose
+Biochemical,triglyc,Triglycerides
+Biochemical,chol,Cholesterol
+Biomarker,Subject.ID,Unique synthetic patient identifier
+Biomarker,visit,Visits
+Biomarker,fibs_stiffness_med_BM_1,Median liver stiffness
+Biomarker,fibrotest_BM_2,Fibrosis probability score
+Biomarker,aixp_aix_result_BM_3,Aixplorer liver stiffness
+Target,risk_hepatic_event,Generate a risk score for event occurence. Expected output-1st 5 rows of the hello_world submission
+Target,risk_death,Generate a risk score for event occurence. Expected output-1st 5 rows of the hello_world submission
