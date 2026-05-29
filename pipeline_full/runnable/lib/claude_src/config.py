@@ -9,8 +9,8 @@ resolved in priority order:
      pipeline_full/runnable/lib/claude_src/ location, i.e. the assembled-repo
      root.
 
-Raw challenge data are NOT redistributed with this repo; see data/README.md
-for placement instructions.
+Raw challenge data are expected under data/raw/ for full retraining; 
+the fast slot1 verification path does not require raw data.
 """
 import os
 from pathlib import Path

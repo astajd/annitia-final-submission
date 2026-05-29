@@ -254,8 +254,8 @@ def main():
             strict_time_aligned_used=False,
             public_LB_tuned_weights=False,
             reproducibility_status=("Regenerated rank-identically from cached intermediates by this script. "
-                                    "Raw-to-anchor reproduction is NOT claimed (upstream tracks are stochastic). "
-                                    "See PROVENANCE_FINDINGS.md."),
+                                    "Full from-raw retraining is provided by retrain_all_from_raw.sh under the pinned environment. "
+                                    "See docs/PROVENANCE.md."),
         ))
         meta_path = META / f"{c['name']}.json"
         with open(meta_path, "w") as f:

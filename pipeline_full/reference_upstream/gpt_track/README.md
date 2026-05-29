@@ -59,7 +59,7 @@ stochastic.**
   GPT anchor on the OOF side from underlying horizon-component OOF
   CSVs. Those proxy weights are an OOF-only reconstruction internal
   to the merged tree, NOT the producer of the test-side anchor CSV.
-  See `../../../PROVENANCE_FINDINGS.md` section (a).
+  See `../../../docs/PROVENANCE.md`.
 
 ## Seeds / env pinning
 
@@ -82,7 +82,7 @@ directory.** The cached anchor CSV
 (`runnable/cached_intermediates/gpt_track_handoff/best_submissions/20260428_0059_phase3_10_horizon_blend_v2.csv`)
 is the authoritative artifact for the GPT side; the final blend in
 `runnable/build_final_3.py` consumes that CSV directly. See
-`../../../audit/TRACE_REPORT.md` and `../../../PROVENANCE_FINDINGS.md`.
+`../../../docs/PROVENANCE.md` and `../../../docs/REPRODUCIBILITY.md`.
 
 ## What is in this tree
 

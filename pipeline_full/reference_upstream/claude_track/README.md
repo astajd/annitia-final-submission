@@ -55,7 +55,7 @@ instructions.
   `experiments/phase2_build_strongpermissive.py` L159), as a record
   of the OOF-selected weight's observed public-LB outcome and as a
   trigger for follow-up audits — NOT as a tuning input. See
-  `../../../PROVENANCE_FINDINGS.md` section (b).
+  `../../../docs/PROVENANCE.md`.
 
 ## Seeds / env pinning
 
@@ -75,7 +75,7 @@ directory.** The cached anchor CSV
 (`runnable/cached_intermediates/claude_track_handoff/best_submissions/phase2_blend_2way_optimal.csv`)
 is the authoritative artifact for the Claude side; the final blend in
 `runnable/build_final_3.py` consumes that CSV directly. See
-`../../../audit/TRACE_REPORT.md` and `../../../PROVENANCE_FINDINGS.md`.
+`../../../docs/PROVENANCE.md` and `../../../docs/REPRODUCIBILITY.md`.
 
 ## What is in this tree
 

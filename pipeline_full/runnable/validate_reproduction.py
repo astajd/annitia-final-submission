@@ -10,7 +10,7 @@ Pass criteria:
     the C-index depends only on ranks).
 
 Float-exact equality is reported as informational only — rank-identity is the
-pass criterion (see PROVENANCE_FINDINGS.md and audit/ for why).
+pass criterion (see docs/REPRODUCIBILITY.md for why).
 
 Run after `python build_final_3.py`. Expects:
   _outputs/submissions/finalprobe_3_lsthr12_disagq95_cw85gbsa15.csv

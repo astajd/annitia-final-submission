@@ -80,7 +80,7 @@ Full details: `docs/RETRAINING.md`, `docs/REPRODUCIBILITY.md`, and
 | `pipeline_full/runnable/` | from-raw retraining orchestrator (`retrain_all_from_raw.sh`, `retrain_lib/`), deterministic slot1 verification script, cached intermediates, lib, configs, requirements |
 | `pipeline_full/reference_upstream/` | upstream Track A (Claude) and Track B (GPT) source code, read-only for reference |
 | `docs/` | retraining, methodology, reproducibility, provenance, leakage audit, limitations, explainability |
-| `reports/explainability/` | per-component attribution tables, structural notes, references, inventory, readiness report, CWGBSA death-model audit |
+| `reports/explainability/` | per-component attribution tables (`tables/`), importance-collection scripts (`scripts/`), `REFERENCES.md`, and the CWGBSA death-model audit (`audit_CWGBSA_death_model.md`) |
 | `data/raw/` | official challenge data (included in this private review repo per organizer clarification) |
 
 ## Method summary

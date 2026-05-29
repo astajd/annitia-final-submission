@@ -1,68 +1,78 @@
 # pipeline_full/runnable
 
-Deterministic regeneration of the submitted slot1 file from **cached
-prediction-level intermediates**. Verifies rank-identity to
-`../../frozen/slot1_prediction.csv`.
+Slot1 regeneration and verification for the ANNITIA submission. This
+directory provides **two verification paths**, matching the root `README.md`.
 
-This is the "verified path." Raw-to-submission reproducibility is NOT
-claimed — see `../../PROVENANCE_FINDINGS.md`, `../../audit/`, and
-`../reference_upstream/` for the upstream tracks and why bit/rank-identical
-raw reproduction is not credible.
-
-## What runs
-
-- `build_final_3.py` — the immediate producer of the slot1 file. Reads
-  cached prediction CSVs from `cached_intermediates/`, applies the
-  deterministic final blend (LS=12 gate, q95 disagreement override,
-  0.85/0.15 death blend), and writes the regenerated CSV to
-  `_outputs/submissions/finalprobe_3_lsthr12_disagq95_cw85gbsa15.csv`.
-
-- `validate_reproduction.py` — checks the regenerated file against
-  `../../frozen/slot1_prediction.csv`: schema, 423 rows, no NaNs,
-  `trustii_id` alignment, and **rank-identity** to the frozen file.
-  Float-exact equality is reported as informational only — rank-identity
-  is the pass criterion.
-
-- `upstream_scripts/` — the producers of the cached intermediates:
-  `task3_tree_survival.py` (CWGBSA / GBSA dea), `task5_gated_ensemble.py`
-  (LS=12 gate), `build_submissions.py` (zoo submission helpers),
-  `build_sprint.py` (50/50 merge). Included for traceability; they are
-  **not re-executed** by the smoke test. Re-running them requires
-  raw challenge data (see `../../data/README.md`) and is subject to
-  library-version sensitivity (sksurv in particular).
-
-## How to verify (reviewer command sequence)
+## Path A — full raw-data retraining
 
 ```bash
+bash retrain_all_from_raw.sh
+```
+
+Retrains **every** slot1 component from the raw challenge data in
+`../../data/raw/` and regenerates the submitted prediction file
+**byte-for-byte** in the tested environment. The generated
+`retrain_outputs/final_retrain_prediction.csv` has whole-file MD5
+`fb04658b99f89ec822e9c604d537dcae` — identical to
+`../../frozen/slot1_prediction.csv` (both endpoints rank-identical and
+float-exact under the pinned environment in `requirements_retrain.txt`).
+See `../../docs/RETRAINING.md`.
+
+## Path B — fast cached-output verification
+
+```bash
+# from repo root: bash frozen/verify.sh
 cd pipeline_full/runnable
-python -m venv .venv && source .venv/bin/activate
-pip install -r requirements.txt
-
-# Place raw data per ../../data/README.md (only needed for label/LS derivation).
-export ANNITIA_DATA_ROOT="/abs/path/to/data/raw"   # OR drop train.csv/test.csv into ../../data/raw/
-
-python build_final_3.py
-python validate_reproduction.py
+python build_slot1_only.py
+python validate_slot1_only.py
 ```
 
-Expected validate output ends with:
+A faster deterministic check that regenerates slot1 from saved
+model-level outputs in `cached_intermediates/` (no retraining).
+`build_slot1_only.py` writes `generated_slot1_prediction.csv`, and
+`validate_slot1_only.py` confirms it is **rank-identical** to
+`../../frozen/slot1_prediction.csv` for both endpoints, ending with:
 
 ```
-SUCCESS — regenerated slot1 is RANK-IDENTICAL to frozen/slot1_prediction.csv
+SUCCESS — generated_slot1_prediction.csv is RANK-IDENTICAL to frozen/slot1_prediction.csv
 ```
+
+Set up the fast-path environment first with
+`pip install -r requirements.txt`. Path B does **not** retrain and does
+**not** require raw data.
+
+## Other scripts (historical / provenance)
+
+- `build_final_3.py` / `validate_reproduction.py` — the original
+  cached-intermediate producer and validator from the assembly sprint.
+  Retained for **provenance** to document how the slot1 blend was first
+  assembled; the reviewer entry points are the Path A and Path B
+  commands above, not these.
+
+- `upstream_scripts/` — the producers of the cached intermediates:
+  `task3_tree_survival.py` (CWGBSA / GBSA death models),
+  `task5_gated_ensemble.py` (LS=12 gate), `build_submissions.py` (zoo
+  submission helpers), `build_sprint.py` (50/50 merge). Included for
+  traceability and exercised by Path A's from-raw retraining; Path B
+  does not re-execute them. See `../../docs/PROVENANCE.md`.
 
 ## Layout
 
 ```
 runnable/
-├── build_final_3.py            # entry point (deterministic blend over cached preds)
-├── validate_reproduction.py    # schema / row count / NaN / id / rank-identity check
-├── requirements.txt
+├── retrain_all_from_raw.sh     # Path A: full from-raw retraining orchestrator
+├── retrain_lib/                # Path A: from-raw retraining stages
+├── build_slot1_only.py         # Path B: deterministic slot1 from cached intermediates
+├── validate_slot1_only.py      # Path B: rank-identity check vs frozen
+├── build_final_3.py            # historical/provenance: original cached-pred blend
+├── validate_reproduction.py    # historical/provenance: rank-identity check
+├── requirements.txt            # Path B (fast) environment
+├── requirements_retrain.txt    # Path A (from-raw, pinned) environment
 ├── README.md
 ├── lib/
 │   ├── zoo_utils.py            # path-patched copy of the zoo utilities
 │   └── claude_src/             # minimal copy of claude/src (cv, data, features, models, config)
-├── upstream_scripts/           # cached-intermediate producers (reference; not re-executed)
+├── upstream_scripts/           # cached-intermediate producers (used by Path A; Path B does not re-execute)
 │   ├── task3_tree_survival.py
 │   ├── task5_gated_ensemble.py
 │   ├── build_submissions.py
@@ -77,14 +87,18 @@ runnable/
     └── model_zoo_sprint/
 ```
 
-## What is and is not reproduced here
+## What each path reproduces
 
-| stage | from cached intermediates | from raw |
+| stage | Path B (from cached intermediates) | Path A (from raw, pinned env) |
 |---|---|---|
-| build_final_3.py final blend | YES, RANK-IDENTICAL (verified by smoke test) | (cached intermediates required) |
-| LS=12 gate emission | YES, deterministic from anchor CSVs + raw LS | inherits anchor break |
-| 50/50 merge | YES, deterministic from anchor CSVs | inherits anchor break |
-| CWGBSA / GBSA dea | (cached files used directly) | runnable, library-version sensitive |
-| GPT hep anchor | (cached file used directly) | producer present; stochastic ensemble, not bit/rank-identical |
-| Claude hep anchor | (cached file used directly) | producer present; weight OOF-selected; stochastic ensemble |
-| Slot1 selection over alternatives | (encoded by `finalprobe_3` being the only submitted file) | manual / closed-LB pruning, not codified |
+| final slot1 blend | YES, RANK-IDENTICAL to frozen | YES, BYTE-IDENTICAL to frozen (MD5 fb04658b99f89ec822e9c604d537dcae) |
+| LS=12 gate emission | deterministic from anchor CSVs + raw LS | retrained from raw |
+| 50/50 merge | deterministic from anchor CSVs | retrained from raw |
+| CWGBSA / GBSA death | cached files used directly | retrained from raw under pinned env |
+| GPT hep anchor | cached file used directly | retrained from raw under pinned env |
+| Claude hep anchor | cached file used directly | retrained from raw under pinned env |
+| Slot1 selection over alternatives | encoded by `finalprobe_3` being the only submitted file | encoded; alternatives are not re-derived |
+
+Byte-exactness of Path A is verified under the pinned environment in
+`requirements_retrain.txt`; reruns under materially different library
+versions may differ. See `../../docs/REPRODUCIBILITY.md`.

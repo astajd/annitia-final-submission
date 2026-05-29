@@ -1,16 +1,23 @@
 # Cached intermediates
 
-These are saved model-level prediction outputs used in the submitted
-ensemble. They are not raw challenge data and are not used to claim
-raw-to-submission reproducibility. The upstream code that produced them is
-included under `reference_upstream/` where available; exact regeneration
-of these intermediates from raw data is not claimed.
+These are the saved model-level prediction outputs used by **Path B**
+(the fast cached-output verification). They are not raw challenge data.
+The upstream code that produced them is included under
+`reference_upstream/`.
+
+Full raw regeneration of these intermediates is now provided by **Path A**
+(`../retrain_all_from_raw.sh`), which retrains every component from
+`../../../data/raw/` under the pinned environment in
+`../requirements_retrain.txt` and reproduces the submitted slot1 file
+byte-for-byte. Exact regeneration of these cached files from raw is
+therefore demonstrated through the retraining command — but **Path B
+itself does not retrain**: it consumes the cached files directly.
 
 The submitted slot1 file (see `../../../frozen/slot1_prediction.csv`) is
 regenerated **rank-identically** from the files in this directory by
-`../build_final_3.py`. See `../../../audit/` for the full provenance trace
-and `../../../PROVENANCE_FINDINGS.md` for the four anchor/gate/death
-findings that classify each upstream.
+`../build_slot1_only.py` (Path B). For the provenance trace and the
+anchor/gate/death findings that classify each upstream, see
+`../../../docs/PROVENANCE.md` and `../../../docs/REPRODUCIBILITY.md`.
 
 ## Layout
 
@@ -54,15 +61,16 @@ cached_intermediates/
   horizon-model OOF/test components; weights pinned in the JSON sidecar
   (`_v3`: 0.7905…, `NIT_plus_scores__h1`: 0.1186, `v3_hepatic_schema__h3__s4`: 0.0909).
   Underlying LGBM/CatBoost/XGB component training is stochastic and library-version
-  sensitive — rerunning from raw is not guaranteed bit/rank-identical. See
-  PROVENANCE_FINDINGS.md section (a).
+  sensitive — under the pinned `../requirements_retrain.txt` environment,
+  Path A's from-raw retraining reproduces the submitted file byte-for-byte.
+  See `../../../docs/PROVENANCE.md`.
 
 - **Claude hep anchor** (`claude_track_handoff/best_submissions/phase2_blend_2way_optimal.csv`):
   produced by `claude/experiments/phase2_stack_2way.py`. Weights
   `0.30 * rank(landmark_3y_RSF) + 0.70 * rank(permissive_ensemble_avg)`.
   Weight selected by argmax of OOF mean-minus-std on a 0.05 grid (5×10
   stratified CV), corroborated by honest-LOFO median 0.35. NOT LB-tuned.
-  See PROVENANCE_FINDINGS.md section (b).
+  See `../../../docs/PROVENANCE.md`.
 
 - **GPT OOF reconstructions** (`gpt_track_handoff/oof_predictions/...`):
   per-component OOF predictions used by `lib/zoo_utils.load_oof_baselines`
@@ -70,7 +78,7 @@ cached_intermediates/
   uses ROUNDED proxy weights (0.7905/0.1186/0.0909) and is a proxy for
   the GPT anchor OOF, NOT the exact GPT anchor (which is the test-side
   CSV in `best_submissions/`). Used only for OOF-side gate computations
-  inside the merged pipeline. See PROVENANCE_FINDINGS.md section (a).
+  inside the merged pipeline. See `../../../docs/PROVENANCE.md`.
 
 - **Claude OOF predictions** (`claude_track_handoff/optional_oof_predictions/...`):
   per-source OOF predictions used by `lib/zoo_utils.load_oof_baselines` for

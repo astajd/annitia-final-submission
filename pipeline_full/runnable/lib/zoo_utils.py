@@ -5,7 +5,7 @@ The only behavioural change vs the original
 reads cached intermediates from `pipeline_full/runnable/cached_intermediates/`
 rather than from absolute paths under `/home/.../annita/merged/`. The
 `load_oof_baselines` function still uses the rounded proxy weights
-(0.7905/0.1186/0.0909) — see PROVENANCE_FINDINGS.md section (a). Those proxy
+(0.7905/0.1186/0.0909) — see docs/PROVENANCE.md. Those proxy
 weights produce GPT-anchor *OOF reconstructions* only; the test-side anchor
 is the frozen CSV in `cached_intermediates/gpt_track_handoff/best_submissions/`.
 
@@ -75,7 +75,7 @@ def load_oof_baselines(pid):
 
     NOTE: the GPT-anchor OOF reconstruction here uses the rounded proxy
     weights 0.7905/0.1186/0.0909, NOT the actual blend weights from the GPT
-    JSON sidecar. See PROVENANCE_FINDINGS.md section (a). The test-side
+    JSON sidecar. See docs/PROVENANCE.md. The test-side
     anchor is the frozen CSV (load_anchors), not derived here.
     """
     base = CACHED / "gpt_track_handoff/oof_predictions"

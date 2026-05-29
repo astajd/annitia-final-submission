@@ -450,7 +450,7 @@ def write_reproducibility_note():
     md.append("- Output ranks (1…423) are equivalent to any monotonic transform under C-index. If the organizer expects calibrated probabilities, additional rescaling would be needed — but the official scoring uses concordance, so ranks are sufficient.")
     md.append("- Cross-track CV folds differ (GPT 5×3 vs Claude 5×10) so any meta-stacker that needs aligned folds is **not** valid; the rank-blends used here do not require fold alignment.")
     md.append("- Per-source weights are documented exactly in each candidate's `metadata/<name>.json`. None were tuned on public LB.")
-    md.append("- Post-hoc blends are reproducible but the underlying source predictions are only reproducible through their respective tracks' source repos; raw data is confidential and not redistributed.")
+    md.append("- Post-hoc blends are reproducible, and the underlying source predictions are reproducible from raw via the from-raw retraining path (retrain_all_from_raw.sh) under the pinned environment. The raw challenge data are included in this private review repo following organizer clarification; redistribution should be reconfirmed if the repo is made public.")
 
     (REP / "reproducibility_note.md").write_text("\n".join(md))
 
