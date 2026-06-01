@@ -12,7 +12,7 @@ The two-track design was deliberate: each track developed its own preprocessing,
 
 ## How selection decisions were made
 
-Component-level model and blend-parameter selection was driven by out-of-fold (OOF) cross-validation. Two choices were exceptions, disclosed explicitly: the 12 kPa liver-stiffness gate threshold was a clinical choice (out-of-fold evaluation marginally favored a higher threshold), and the final candidate among several was selected with reference to the public leaderboard. The precise basis for each decision is tabulated in `LEAKAGE_AUDIT.md`.
+Component-level model and blend-parameter selection was driven by out-of-fold (OOF) cross-validation. Two choices were exceptions, disclosed explicitly: the 12 kPa liver-stiffness gate threshold was a clinical choice (out-of-fold evaluation marginally favored a higher, 18 kPa threshold), and the primary submission among the candidates sharing the 12 kPa gate was selected with reference to the public leaderboard. The precise basis for each decision is tabulated in `LEAKAGE_AUDIT.md`.
 
 The Track A models used 5x10 repeated stratified cross-validation (5 folds, 10 repeats), stratified by event indicator, with a base random seed of 42 and per-repeat seed offsets, aggregating across folds by mean-of-ranks. Repeated CV was chosen to reduce the variance of fold estimates, which matters when selecting between candidates whose true performance differs by small margins.
 
@@ -22,7 +22,7 @@ The hepatic risk is constructed from two track-level anchor predictions, a liver
 
 ### Model families
 
-The Track A (Claude) hepatic anchor is a survival-model ensemble combining a random survival forest and gradient-boosted Cox models (XGBoost survival objective); exact component lineage is given in `PROVENANCE.md`. The Track B (GPT) hepatic anchor is a rank-blend of gradient-boosted survival models. Both are genuine survival-model ensembles, not heuristic combinations.
+The Track A (Claude) hepatic anchor is a 0.30/0.70 blend of a landmark random survival forest component and a permissive rank-mean component combining additional random survival forest and XGBoost-Cox models; exact component lineage is given in `PROVENANCE.md`. The Track B (GPT) hepatic anchor is a rank-blend of gradient-boosted survival models. Both are genuine survival-model ensembles, not heuristic combinations.
 
 ### Liver-stiffness gate
 
@@ -49,4 +49,4 @@ Both endpoint risks are converted to ranks for submission, consistent with the r
 
 ## Candidate selection
 
-Several final candidates were generated. The submitted candidate was selected with reference to the public leaderboard: an alternative configuration that scored marginally higher on out-of-fold evaluation was not chosen because it scored lower on the public leaderboard. This leaderboard-informed step is distinct from the parameter choices above (q95 override, death blend, anchor blend weights), which were cross-validation-selected. It is disclosed in `LEAKAGE_AUDIT.md` and `LIMITATIONS.md`.
+Several final candidates were generated; their selection splits into two separable decisions. First, the liver-stiffness gate threshold was a clinical choice: the out-of-fold-best candidate used an 18 kPa gate (`finalprobe_1_lsthr18_disagq95_cw85gbsa15`) and differed from the submitted `finalprobe_3_lsthr12_disagq95_cw85gbsa15` only in that threshold, favoring 18 kPa by about +0.0012 weighted-C; 12 kPa was retained for clinical defensibility, and the 18 kPa variant was OOF-confirmed only and never scored on the public leaderboard. Second, among the candidates sharing the 12 kPa gate (which differ in the death blend and the disagreement override), the public leaderboard informed which was submitted as primary. The q95 override, death blend, and anchor blend weights were cross-validation-selected. This is disclosed in `LEAKAGE_AUDIT.md` and `LIMITATIONS.md`.

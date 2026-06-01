@@ -172,7 +172,7 @@ def main():
         hep_oof=p3_h_oof, hep_te=p3_h_te,
         dea_oof=dea_blend_oof, dea_te=dea_blend_te,
         meta=dict(
-            hep_strategy="LS gate at LS_last>=12 kPa (Baveno VII rule-in for cACLD; Claude/GPT) + top-5%-disagreement override → merge_50_50 hep",
+            hep_strategy="LS gate at LS_last>=12 kPa (MASLD/NIT high-risk or advanced-fibrosis threshold, not the Baveno VII CSPH rule-in threshold; Claude/GPT) + top-5%-disagreement override → merge_50_50 hep",
             dea_strategy="0.85 * rank(CWGBSA dea) + 0.15 * rank(GBSA dea)",
             ls_threshold_kPa=12,
             disag_quantile=0.95,
@@ -182,7 +182,7 @@ def main():
             dea_blend_weight_gbsa=0.15,
             priority=3,
             qualitative_risk="low",
-            rationale=("Preserves Baveno VII 12 kPa rule-in cutoff for the LS gate, with disagreement-override and dea-blend gains. "
+            rationale=("Preserves the clinically anchored 12 kPa LS gate (MASLD/NIT high-risk / advanced-fibrosis threshold, not the Baveno VII CSPH rule-in threshold), with disagreement-override and dea-blend gains. "
                        "Δw_oof +0.0023. SLOT1 SUBMITTED."),
         ),
     ))

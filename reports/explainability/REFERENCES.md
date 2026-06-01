@@ -106,7 +106,7 @@ Applying this rule across the package:
 | package claim | matched citation | wording used |
 |---|---|---|
 | 12 kPa is a clinically interpretable MASLD/NIT high-risk or advanced-fibrosis threshold | Rinella et al. 2023 (AASLD) | "a clinically interpretable MASLD/NIT high-risk or advanced-fibrosis threshold" |
-| 12 kPa is the Baveno VII CSPH rule-in threshold | NONE — Baveno VII's CSPH rule-in is ≥25 kPa | **not used; explicitly disclaimed** in METHODOLOGY.md §29-31, LEAKAGE_AUDIT.md §13, LIMITATIONS.md §15 |
+| 12 kPa is the Baveno VII CSPH rule-in threshold | NONE — Baveno VII's CSPH rule-in is ≥25 kPa | **not used; explicitly disclaimed** in METHODOLOGY.md, LEAKAGE_AUDIT.md, and LIMITATIONS.md |
 | Risk strata for cACLD/CSPH under Baveno VII | de Franchis et al. 2022 (Baveno VII) | rule-of-five (10/15/20/25 kPa); CSPH rule-out ≤15 kPa + plt ≥150; CSPH rule-in ≥25 kPa |
 | 12 kPa sits within the broader MASLD NIT risk-stratification range | EASL/EASD/EASO 2024 + Rinella 2023 | "a threshold within the range used for MASLD/NIT risk stratification" (safe fallback wording if reviewer prefers an EASL-only citation) |
 | Rank-only outputs are appropriate for the C-index objective | Harrell et al. 1996 | "rank-based C-index objective; submissions emitted as `scipy.stats.rankdata`" |

@@ -1,5 +1,5 @@
 {
-  "hep_strategy": "LS gate at LS_last>=12 kPa (Baveno VII rule-in for cACLD; Claude/GPT) + top-5%-disagreement override \u2192 merge_50_50 hep",
+  "hep_strategy": "LS gate at LS_last>=12 kPa (MASLD/NIT high-risk or advanced-fibrosis threshold, not the Baveno VII CSPH rule-in threshold; Claude/GPT) + top-5%-disagreement override \u2192 merge_50_50 hep",
   "dea_strategy": "0.85 * rank(CWGBSA dea) + 0.15 * rank(GBSA dea)",
   "ls_threshold_kPa": 12,
   "disag_quantile": 0.95,
@@ -9,7 +9,7 @@
   "dea_blend_weight_gbsa": 0.15,
   "priority": 3,
   "qualitative_risk": "low",
-  "rationale": "Preserves the clinically anchored 12 kPa Baveno VII rule-in cutoff for the LS gate, while still capturing the disagreement-override and dea-blend gains. \u0394w_oof +0.0023. Most defensible choice in a methodology write-up: LS=12 has guideline support; LS=18 is OOF-confirmed only.",
+  "rationale": "Preserves the clinically anchored 12 kPa LS gate (treated here as a MASLD/NIT high-risk or advanced-fibrosis threshold, not the Baveno VII CSPH rule-in threshold), while still capturing the disagreement-override and dea-blend gains. \u0394w_oof +0.0023. Most defensible choice in a methodology write-up: LS=12 has guideline support; LS=18 is OOF-confirmed only.",
   "candidate_name": "finalprobe_3_lsthr12_disagq95_cw85gbsa15",
   "submission_csv": "final_probe_sprint/submissions/finalprobe_3_lsthr12_disagq95_cw85gbsa15.csv",
   "source_components": {

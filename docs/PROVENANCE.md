@@ -86,9 +86,18 @@ Output ordering: by `trustii_id` ascending (from the GPT anchor CSV).
   (`requirements_retrain.txt`). The hepatic anchors and death components are
   stochastic and library-version sensitive, so this byte-exactness holds
   under that pinned environment rather than across arbitrary versions.
-- **The slot1-vs-alternative selection was public-leaderboard-informed.**
-  `finalprobe_3` was chosen over OOF-superior `finalv2_LS14` via public-LB
-  candidate pruning on a now-closed leaderboard. This caveat stands
+- **The slot1-vs-alternative selection involved two separable decisions.**
+  The submitted candidate is `finalprobe_3_lsthr12_disagq95_cw85gbsa15`. The
+  out-of-fold-best alternative, `finalprobe_1_lsthr18_disagq95_cw85gbsa15`, is
+  identical to it in every component (q95 disagreement override;
+  `0.85·CWGBSA + 0.15·GBSA` death blend) except the liver-stiffness gate
+  threshold — 18 kPa instead of 12 kPa. The 12 kPa gate was retained on
+  clinical grounds at a small out-of-fold cost (weighted-OOF Δ ≈ +0.0012 in the
+  18 kPa variant's favor); the 18 kPa variant was OOF-confirmed only and was not
+  scored on the public leaderboard. Separately, the public leaderboard informed
+  the primary submission only among the candidates sharing the 12 kPa gate
+  (which differ in the death blend and the disagreement override, not the gate
+  threshold); `finalprobe_3` had public-LB score 0.92198. These caveats stand
   independently of the byte-for-byte reproduction above.
 
 ## Provenance of each cached input (consumed by `build_slot1_only.py`)
