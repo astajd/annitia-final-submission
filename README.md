@@ -136,8 +136,7 @@ GBSA is `sksurv.ensemble.GradientBoostingSurvivalAnalysis`.
 ## Data
 
 The official ANNITIA / Trustii.io / IHU ICAN challenge data are **included**
-in this private review repository under `data/raw/`, following organizer
-clarification. They are required for Path A (full from-raw retraining) and
+in this repository under `data/raw/`, following organizer clarification. They are required for Path A (full from-raw retraining) and
 for the upstream reference code under `pipeline_full/reference_upstream/`.
 Path B (`bash frozen/verify.sh` followed by `build_slot1_only.py` /
 `validate_slot1_only.py`) does **not** require raw data.

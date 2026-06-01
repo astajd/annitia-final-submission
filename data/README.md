@@ -1,6 +1,6 @@
 # data/
 
-**The official challenge data are included in this private review repository,
+**The official challenge data are included in this repository,
 under `data/raw/`, following organizer clarification.** The ANNITIA /
 Trustii.io / IHU ICAN dataset is licensed by the data provider. If this
 repository is later made public, redistribution of the dataset should be

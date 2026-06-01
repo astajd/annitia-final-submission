@@ -17,7 +17,7 @@ This document states the limitations of the submitted solution and its reproduci
 ## Data
 
 - **The dataset is synthetic.** Feature-effect patterns reflect the data-generating process, not validated clinical associations. Clinical insights derived from the model (see `EXPLAINABILITY.md`) are framed accordingly and should not be read as causal or clinically established.
-- **The challenge data are included for review under license.** The official files are present in `data/raw/` in this private review repository following organizer clarification (see `data/README.md`). If the repository is later made public, redistribution of the dataset should be reconfirmed with the data provider.
+- **The challenge data are included following organizer clarification.** The official files are present in `data/raw/` in this repository following organizer clarification (see `data/README.md`). Any further redistribution beyond this repository should be reconfirmed with the data provider.
 
 ## Explainability scope
 
