@@ -145,8 +145,3 @@ Path B (`bash frozen/verify.sh` followed by `build_slot1_only.py` /
 `data/README.md` documents the filenames, row counts, schema, and loader
 resolution order. If this repository is later made public, redistribution of
 the dataset should be reconfirmed with the data provider.
-
-## Sharing
-
-This repository is intended to be shared **privately** with reviewers on
-request — not made public by default.
