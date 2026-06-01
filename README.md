@@ -1,6 +1,6 @@
-# ANNITIA Data Challenge — slot1 submission
+# ANNITIA Data Challenge — Solution Repository
 
-This is the **ANNITIA slot1 submission repository** for the ANNITIA /
+This repository contains the final submitted prediction file and reproducible solution materials for the ANNITIA /
 Trustii.io / IHU ICAN data challenge: survival prediction in patients with
 metabolic dysfunction-associated steatotic liver disease (MASLD) for two
 endpoints, a hepatic-event endpoint and an all-cause-death endpoint.
@@ -23,7 +23,7 @@ Both paths have been run in this submitted repository.
 bash pipeline_full/runnable/retrain_all_from_raw.sh
 ```
 
-Retrains **every** slot1 component from the raw challenge data in `data/raw/`
+Retrains **every** model component used in the final submission from the raw challenge data in `data/raw/`
 and regenerates the submitted prediction file **byte-for-byte** in the tested
 environment. The generated
 `pipeline_full/runnable/retrain_outputs/final_retrain_prediction.csv` has
@@ -42,14 +42,10 @@ python build_slot1_only.py
 python validate_slot1_only.py
 ```
 
-A faster deterministic check that regenerates slot1 from saved model-level
+A faster deterministic check that regenerates the final submitted prediction from saved model-level
 outputs (no retraining). `validate_slot1_only.py` confirms the regenerated
 `generated_slot1_prediction.csv` is rank-identical to
-`frozen/slot1_prediction.csv` for both endpoints, ending with:
-
-```
-SUCCESS — generated_slot1_prediction.csv is RANK-IDENTICAL to frozen/slot1_prediction.csv
-```
+`frozen/slot1_prediction.csv` for both endpoints.
 
 Set up the environment first with
 `pip install -r pipeline_full/runnable/requirements.txt`.
@@ -81,16 +77,14 @@ Full details: `docs/RETRAINING.md`, `docs/REPRODUCIBILITY.md`, and
 | `pipeline_full/reference_upstream/` | upstream Track A (Claude) and Track B (GPT) source code, read-only for reference |
 | `docs/` | retraining, methodology, reproducibility, provenance, leakage audit, limitations, explainability |
 | `reports/explainability/` | per-component attribution tables (`tables/`), importance-collection scripts (`scripts/`), `REFERENCES.md`, and the CWGBSA death-model audit (`audit_CWGBSA_death_model.md`) |
-| `data/raw/` | official challenge data (included in this private review repo per organizer clarification) |
+| `data/raw/` | official challenge data (included under `data/raw/` following organizer clarification) |
 
 ## Method summary
 
 **Hepatic endpoint.** Two independently developed track anchors:
 
-- Track A (Claude): a survival-model ensemble combining a random survival
-  forest and gradient-boosted Cox models (XGBoost survival objective).
-- Track B (GPT): a rank-blend of gradient-boosted survival models across
-  multiple prediction horizons.
+- Track A: a 0.30/0.70 blend of a landmark random survival forest component and a permissive rank-mean component combining additional RSF and XGBoost-Cox models.
+- Track B: a rank-blend of gradient-boosted survival models across multiple prediction horizons.
 
 Patients are routed by their most recent liver-stiffness measurement using
 a 12 kPa gate (LS ≥ 12 kPa → Track A; LS < 12 kPa or missing → Track B).
@@ -142,5 +136,4 @@ Path B (`bash frozen/verify.sh` followed by `build_slot1_only.py` /
 `validate_slot1_only.py`) does **not** require raw data.
 
 `data/README.md` documents the filenames, row counts, schema, and loader
-resolution order. If this repository is later made public, redistribution of
-the dataset should be reconfirmed with the data provider.
+resolution order. Any further redistribution beyond this repository should be reconfirmed with the data provider.
