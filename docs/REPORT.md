@@ -199,13 +199,13 @@ precisely.
 
 **The 12 kPa gate threshold was a clinical choice.** Out-of-fold evaluation
 marginally favored an 18 kPa gate, by about +0.0012 weighted-C. The OOF-best
-candidate (`finalprobe_1_lsthr18_disagq95_cw85gbsa15`) is identical to the
-submitted candidate (`finalprobe_3_lsthr12_disagq95_cw85gbsa15`) in every
-component (same q95 disagreement override, same 0.85/0.15 death blend) **except
-the gate threshold: 18 kPa instead of 12 kPa**. The 12 kPa threshold was
-retained for clinical defensibility, knowingly accepting that small out-of-fold
-cost. The 18 kPa variant was OOF-confirmed only and was never scored on the
-public leaderboard.
+candidate, referred to in the repository as `finalprobe_1`, is identical to the
+submitted candidate, `finalprobe_3`, in every component except the gate
+threshold. Both use the q95 disagreement override and the same 0.85/0.15 death
+blend; the only difference is the gate threshold, 18 kPa instead of 12 kPa. The
+12 kPa threshold was retained for clinical defensibility, knowingly accepting
+that small out-of-fold cost. The 18 kPa variant was OOF-confirmed only and was
+never scored on the public leaderboard.
 
 **The primary submission was selected within the LS=12 family using the public
 leaderboard.** Among the submitted candidates (all sharing the 12 kPa gate and
