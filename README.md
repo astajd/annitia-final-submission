@@ -8,6 +8,8 @@ Submissions are scored by a weighted concordance index
 (0.7 × C_hepatic + 0.3 × C_death), which depends only on the ordering of
 predicted risks; the submitted file emits rank-valued risks accordingly.
 
+**Solution report:** [`docs/REPORT.pdf`](docs/REPORT.pdf)  
+
 **Submitted file: `frozen/slot1_prediction.csv`** — 423 rows; columns
 `trustii_id`, `risk_hepatic_event`, `risk_death`. SHA-256
 `5b0f1043f0b27addab5cc8dde33e2774371e9370c231633462f2f29337e57618`
